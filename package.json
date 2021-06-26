@@ -12,9 +12,11 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "lint:eslint": "eslint . --ignore-path .gitignore",
-    "lint": "npm run lint:eslint",
+    "lint:stylelint": "stylelint \"**/*.css\" --ignore-path .gitignore",
+    "lint": "npm run lint:eslint && npm run lint:stylelint",
     "format:eslint": "eslint . --fix --ignore-path .gitignore",
-    "format": "npm run format:eslint"
+    "format:stylelint": "stylelint \"**/*.css\" --fix --ignore-path .gitignore",
+    "format": "npm run format:eslint; npm run format:stylelint"
   },
   "dependencies": {
     "react": "^17.0.0",
@@ -27,6 +29,10 @@
     "@typescript-eslint/parser": "^4.28.0",
     "@vitejs/plugin-react-refresh": "^1.3.1",
     "eslint": "^7.29.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-hudochenkov": "^5.0.0",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
     "typescript": "^4.3.2",
     "vite": "^2.3.8"
   }
