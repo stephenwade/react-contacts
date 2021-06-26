@@ -10,7 +10,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "lint:eslint": "eslint . --ignore-path .gitignore",
+    "lint": "npm run lint:eslint",
+    "format:eslint": "eslint . --fix --ignore-path .gitignore",
+    "format": "npm run format:eslint"
   },
   "dependencies": {
     "react": "^17.0.0",
@@ -19,7 +23,10 @@
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
     "@vitejs/plugin-react-refresh": "^1.3.1",
+    "eslint": "^7.29.0",
     "typescript": "^4.3.2",
     "vite": "^2.3.8"
   }
