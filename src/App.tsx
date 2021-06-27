@@ -1,43 +1,41 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+
+import { Contact } from './types';
+
 import './App.css';
 
+const CONTACTS_ENDPOINT = 'https://avb-contacts-api.herokuapp.com/contacts';
+
 function App(): JSX.Element {
-  const [count, setCount] = useState(0);
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const getContacts = async () => {
+      try {
+        const result = await fetch(CONTACTS_ENDPOINT);
+        if (!result.ok) {
+          setError(true);
+          return;
+        }
+
+        const json = (await result.json()) as Contact[];
+        setContacts(json);
+      } catch {
+        setError(true);
+      }
+    };
+
+    getContacts();
+  }, []);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      {error ? (
+        'Something went wrong!'
+      ) : (
+        <pre>{JSON.stringify(contacts, undefined, 2)}</pre>
+      )}
     </div>
   );
 }
