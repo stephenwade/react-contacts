@@ -1,3 +1,7 @@
+import { ThunkAction } from 'redux-thunk';
+
+import { AppState } from './store';
+
 export type Contact = {
   id: number;
   firstName: string;
@@ -6,15 +10,22 @@ export type Contact = {
 };
 
 export enum ActionType {
+  ContactsLoaded,
   Error,
-  LoadContacts,
+  LoadingStarted,
+  LoadingFinished,
 }
 
-export type Action =
+export type BasicAction =
   | {
-      type: ActionType.Error;
+      type:
+        | ActionType.Error
+        | ActionType.LoadingStarted
+        | ActionType.LoadingFinished;
     }
   | {
-      type: ActionType.LoadContacts;
+      type: ActionType.ContactsLoaded;
       contacts: Contact[];
     };
+
+export type AppThunkAction = ThunkAction<void, AppState, unknown, BasicAction>;

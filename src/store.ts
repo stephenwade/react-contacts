@@ -1,11 +1,10 @@
-import { Dispatch } from 'react';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import thunk, { ThunkDispatch } from 'redux-thunk';
 
 import contactsReducer from './reducers/contacts';
 import errorReducer from './reducers/error';
-import { Action } from './types.js';
+import { BasicAction } from './types';
 
 const rootReducer = combineReducers({
   contacts: contactsReducer,
@@ -14,9 +13,9 @@ const rootReducer = combineReducers({
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));
 
-type AppState = ReturnType<typeof store.getState>;
+export type AppState = ReturnType<typeof store.getState>;
 type AppDispatch = typeof store.dispatch;
 
-export const useAppDispatch = (): Dispatch<Action> =>
+export const useAppDispatch = (): ThunkDispatch<AppState, never, BasicAction> =>
   useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;

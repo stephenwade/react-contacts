@@ -4,8 +4,11 @@ import { ActionType, BasicAction } from '../types';
 
 const errorReducer: Reducer<boolean, BasicAction> = (state = false, action) => {
   switch (action.type) {
-    case ActionType.Error:
+    case ActionType.LoadingStarted:
       return true;
+
+    case ActionType.LoadingFinished:
+      return false;
   }
 
   return state;

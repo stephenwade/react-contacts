@@ -1,10 +1,13 @@
 import { Reducer } from 'redux';
 
-import { Action, ActionType, Contact } from '../types';
+import { ActionType, BasicAction, Contact } from '../types';
 
-const contactsReducer: Reducer<Contact[], Action> = (state = [], action) => {
+const contactsReducer: Reducer<Contact[], BasicAction> = (
+  state = [],
+  action
+) => {
   switch (action.type) {
-    case ActionType.LoadContacts:
+    case ActionType.ContactsLoaded:
       return action.contacts;
   }
 
