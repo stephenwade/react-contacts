@@ -18,7 +18,8 @@
     "format:eslint": "eslint . --fix --ignore-path .gitignore",
     "format:stylelint": "stylelint \"**/*.css\" --fix --ignore-path .gitignore",
     "format:prettier": "prettier . --write --ignore-path .gitignore --loglevel warn",
-    "format": "npm run format:eslint; npm run format:stylelint; npm run format:prettier"
+    "format": "npm run format:eslint; npm run format:stylelint; npm run format:prettier",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^17.0.0",
@@ -34,6 +35,8 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
     "prettier": "^2.3.1",
     "stylelint": "^13.13.1",
     "stylelint-config-hudochenkov": "^5.0.0",
