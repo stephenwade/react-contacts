@@ -1,27 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { useAppDispatch, useAppSelector } from '../store';
-import { loadContacts } from '../actions/contacts';
+import Sidebar from './Sidebar';
+import ContactEditor from './ContactEditor';
+import { useAppSelector } from '../store';
 
 import './App.css';
 
 function App(): JSX.Element {
-  const contacts = useAppSelector((state) => state.contacts);
   const error = useAppSelector((state) => state.error);
-  const dispatch = useAppDispatch();
-
-  // This effect will only run the first time the component is rendered
-  useEffect(() => {
-    dispatch(loadContacts());
-  }, [dispatch]);
+  const loading = useAppSelector((state) => state.loading);
 
   return (
     <div className="App">
-      {error ? (
-        'Something went wrong!'
-      ) : (
-        <pre>{JSON.stringify(contacts, undefined, 2)}</pre>
-      )}
+      {/* TODO: Add loading spinner */}
+      {loading && <h2>Loading</h2>}
+      <Sidebar />
+      <ContactEditor />
+      {/* TODO: Add error snackbar */}
+      {error && <h2>Error</h2>}
     </div>
   );
 }

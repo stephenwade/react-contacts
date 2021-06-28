@@ -2,7 +2,10 @@ import { Reducer } from 'redux';
 
 import { ActionType, BasicAction } from '../types';
 
-const errorReducer: Reducer<boolean, BasicAction> = (state = false, action) => {
+const loadingReducer: Reducer<boolean, BasicAction> = (
+  state = false,
+  action
+) => {
   switch (action.type) {
     case ActionType.LoadingStarted:
       return true;
@@ -14,4 +17,4 @@ const errorReducer: Reducer<boolean, BasicAction> = (state = false, action) => {
   return state;
 };
 
-export default errorReducer;
+export default loadingReducer;

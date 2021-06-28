@@ -1,6 +1,6 @@
 import { loadingStarted, loadingFinished } from './loading';
 import { error } from './error';
-import { ActionType, AppThunkAction, Contact } from '../types';
+import { ActionType, AppThunkAction, BasicAction, Contact } from '../types';
 
 const CONTACTS_ENDPOINT = 'https://avb-contacts-api.herokuapp.com/contacts';
 
@@ -20,6 +20,11 @@ export const loadContacts = (): AppThunkAction => async (dispatch) => {
   try {
     const contacts = await loadData();
     dispatch({ type: ActionType.ContactsLoaded, contacts });
+
+    // TODO: Remove after adding interactivity
+    if (contacts.length >= 2) {
+      dispatch({ type: ActionType.ContactSelect, id: contacts[1].id });
+    }
   } catch (e) {
     dispatch(error());
     throw e;
@@ -27,3 +32,8 @@ export const loadContacts = (): AppThunkAction => async (dispatch) => {
 
   dispatch(loadingFinished());
 };
+
+export const selectContact = (id: number): BasicAction => ({
+  type: ActionType.ContactSelect,
+  id,
+});

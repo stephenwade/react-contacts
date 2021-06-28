@@ -1,0 +1,8 @@
+.SidebarListItem {
+  padding: 7px var(--horizontal-padding);
+}
+
+.SidebarListItem.active {
+  background-color: var(--primary-color);
+  color: white;
+}

@@ -1,0 +1,12 @@
+.AddButton {
+  width: 1em;
+  height: 1em;
+}
+
+.AddButton circle {
+  fill: var(--primary-color);
+}
+
+.AddButton path {
+  fill: white;
+}

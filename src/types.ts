@@ -11,6 +11,7 @@ export type Contact = {
 
 export enum ActionType {
   ContactsLoaded,
+  ContactSelect,
   Error,
   LoadingStarted,
   LoadingFinished,
@@ -26,6 +27,10 @@ export type BasicAction =
   | {
       type: ActionType.ContactsLoaded;
       contacts: Contact[];
+    }
+  | {
+      type: ActionType.ContactSelect;
+      id: number;
     };
 
 export type AppThunkAction = ThunkAction<void, AppState, unknown, BasicAction>;
