@@ -1,3 +1,79 @@
 .ContactEditor {
+  position: relative;
+  display: flex;
   flex-grow: 1;
+  flex-direction: column;
+  padding: 77px 32px 32px 32px;
+  color: var(--text-color);
+}
+
+.ContactEditor > .EmptyMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-bottom: 45px;
+  text-align: center;
+}
+
+.ContactEditor > .EmptyMessage .AddButton {
+  position: relative;
+  top: 6px;
+  margin-right: 3px;
+  margin-left: 3px;
+  font-size: 24px;
+}
+
+.ContactEditor > .NameRow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.ContactEditor > .NameRow > .LabelContainer {
+  width: calc((100% - 40px) / 2);
+  margin-bottom: 24px;
+}
+
+.ContactEditor > .NameRow .TextInput {
+  margin-top: 7px;
+}
+
+.ContactEditor > .EmailRow .EmailsInput {
+  margin-top: 3px;
+}
+
+.ContactEditor > .ButtonsRow {
+  display: flex;
+  flex-grow: 1;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 32px;
+  margin-left: -32px;
+}
+
+.ContactEditor button {
+  min-width: 120px;
+  padding: 6px 12px;
+}
+
+.ContactEditor button.primary {
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.ContactEditor button.secondary {
+  border: 1px solid var(--primary-color);
+  background-color: var(--background-color-2);
+}
+
+.ContactEditor button.destructive {
+  border: 1px solid var(--alert-color);
+  background-color: var(--alert-color);
+  color: white;
+}
+
+.ContactEditor > .ButtonsRow button {
+  margin-left: 32px;
 }

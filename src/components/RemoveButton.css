@@ -1,0 +1,12 @@
+.RemoveButton svg {
+  width: 1em;
+  height: 1em;
+}
+
+.RemoveButton circle {
+  fill: var(--alert-color);
+}
+
+.RemoveButton path {
+  fill: white;
+}

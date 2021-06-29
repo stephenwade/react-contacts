@@ -22,8 +22,8 @@ export const loadContacts = (): AppThunkAction => async (dispatch) => {
     dispatch({ type: ActionType.ContactsLoaded, contacts });
 
     // TODO: Remove after adding interactivity
-    if (contacts.length >= 2) {
-      dispatch({ type: ActionType.ContactSelect, id: contacts[1].id });
+    if (contacts.length >= 3) {
+      dispatch({ type: ActionType.ContactSelect, id: contacts[2].id });
     }
   } catch (e) {
     dispatch(error());

@@ -1,6 +1,9 @@
 .App {
   --primary-color: #579aff;
+  --primary-color-2: #d7e7ff;
   --background-color: #f8faff;
+  --background-color-2: #f9fbff;
+  --alert-color: #ff5758;
   --heading-color: #000;
   --text-color: #444;
   --text-color-2: #555;

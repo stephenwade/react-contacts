@@ -1,0 +1,8 @@
+.LabelContainer > .Label {
+  color: var(--text-color-2);
+  font-size: 12px;
+}
+
+.LabelContainer > * {
+  width: 100%;
+}
