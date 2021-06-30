@@ -12,10 +12,8 @@ function App(): JSX.Element {
 
   return (
     <div className="App">
-      {/* TODO: Add loading spinner */}
-      {loading && <h2>Loading</h2>}
       <Sidebar />
-      <ContactEditor />
+      <ContactEditor loading={loading} />
       {/* TODO: Add error snackbar */}
       {error && <h2>Error</h2>}
     </div>

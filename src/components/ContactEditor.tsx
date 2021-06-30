@@ -8,10 +8,12 @@ import { useAppSelector } from '../store';
 
 import './ContactEditor.css';
 
-function ContactEditor(): JSX.Element {
+function ContactEditor(props: { loading: boolean }): JSX.Element {
   const { contacts, activeId } = useAppSelector((state) => state.contacts);
 
   const activeContact = contacts.find((contact) => contact.id === activeId);
+
+  const { loading } = props;
 
   return (
     <div className="ContactEditor">
@@ -43,8 +45,14 @@ function ContactEditor(): JSX.Element {
       ) : (
         <div className="EmptyMessage">
           <span>
-            Click a contact to view or edit it. Click <AddButton /> to add a new
-            contact.
+            {loading ? (
+              <>Loading…</>
+            ) : (
+              <>
+                Click a contact to view or edit it. Click <AddButton /> to add a
+                new contact.
+              </>
+            )}
           </span>
         </div>
       )}
