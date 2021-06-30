@@ -30,7 +30,7 @@ export type BasicAction =
     }
   | {
       type: ActionType.ContactSelect;
-      id: number;
+      id: number | null;
     };
 
 export type AppThunkAction = ThunkAction<void, AppState, unknown, BasicAction>;

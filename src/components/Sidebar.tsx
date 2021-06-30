@@ -2,12 +2,26 @@ import React from 'react';
 
 import AddButton from './AddButton';
 import SidebarListItem from './SidebarListItem';
-import { useAppSelector } from '../store';
+import { useAppDispatch, useAppSelector } from '../store';
+import { selectContact, unselectContact } from '../actions/contacts';
 
 import './Sidebar.css';
 
 function Sidebar(): JSX.Element {
   const { contacts, activeId } = useAppSelector((state) => state.contacts);
+  const dispatch = useAppDispatch();
+
+  const onContactClick = (contactId: number) => {
+    const active = contactId === activeId;
+
+    // TODO: Check if ContactEditor is dirty and ask for confirmation
+
+    if (active) {
+      dispatch(unselectContact());
+    } else {
+      dispatch(selectContact(contactId));
+    }
+  };
 
   contacts.sort((a, b) => {
     const fullNameA = `${a.firstName} ${a.lastName}`;
@@ -27,7 +41,8 @@ function Sidebar(): JSX.Element {
           <SidebarListItem
             key={contact.id}
             contact={contact}
-            active={contact.id === activeId ? true : false}
+            active={contact.id === activeId}
+            onClick={() => onContactClick(contact.id)}
           />
         ))}
       </ul>

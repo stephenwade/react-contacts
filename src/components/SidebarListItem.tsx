@@ -7,11 +7,15 @@ import './SidebarListItem.css';
 function SidebarListItem(props: {
   contact: Contact;
   active: boolean;
+  onClick?: React.MouseEventHandler<HTMLLIElement>;
 }): JSX.Element {
-  const { active, contact } = props;
+  const { active, contact, onClick } = props;
 
   return (
-    <li className={`SidebarListItem ${active ? 'active' : ''}`}>
+    <li
+      className={`SidebarListItem ${active ? 'active' : ''}`}
+      onClick={onClick}
+    >
       {contact.firstName} {contact.lastName}
     </li>
   );

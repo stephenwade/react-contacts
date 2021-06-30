@@ -20,11 +20,6 @@ export const loadContacts = (): AppThunkAction => async (dispatch) => {
   try {
     const contacts = await loadData();
     dispatch({ type: ActionType.ContactsLoaded, contacts });
-
-    // TODO: Remove after adding interactivity
-    if (contacts.length >= 3) {
-      dispatch({ type: ActionType.ContactSelect, id: contacts[2].id });
-    }
   } catch (e) {
     dispatch(error());
     throw e;
@@ -36,4 +31,9 @@ export const loadContacts = (): AppThunkAction => async (dispatch) => {
 export const selectContact = (id: number): BasicAction => ({
   type: ActionType.ContactSelect,
   id,
+});
+
+export const unselectContact = (): BasicAction => ({
+  type: ActionType.ContactSelect,
+  id: null,
 });
