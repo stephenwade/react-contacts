@@ -20,6 +20,7 @@
   top: 20px;
   right: 16px;
   font-size: 32px;
+  cursor: pointer;
 }
 
 .Sidebar > ul {
@@ -30,4 +31,8 @@
   padding: 0;
   color: var(--text-color);
   list-style: none;
+}
+
+.Sidebar > ul > .SidebarListItem {
+  cursor: pointer;
 }

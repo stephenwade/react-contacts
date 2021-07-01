@@ -22,6 +22,7 @@
   margin-right: 3px;
   margin-left: 3px;
   font-size: 24px;
+  cursor: pointer;
 }
 
 .ContactEditor > .NameRow {
@@ -55,6 +56,7 @@
 .ContactEditor button {
   min-width: 120px;
   padding: 6px 12px;
+  cursor: pointer;
 }
 
 .ContactEditor button.primary {
