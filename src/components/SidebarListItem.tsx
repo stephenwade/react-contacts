@@ -4,11 +4,19 @@ import { Contact } from '../types';
 
 import './SidebarListItem.css';
 
-function SidebarListItem(props: {
-  contact: Contact;
-  active: boolean;
-  onClick?: React.MouseEventHandler<HTMLLIElement>;
-}): JSX.Element {
+function SidebarListItem(
+  props:
+    | {
+        contact: Contact;
+        active: boolean;
+        onClick?: React.MouseEventHandler<HTMLLIElement>;
+      }
+    | { new: true }
+): JSX.Element {
+  if ('new' in props) {
+    return <li className="SidebarListItem new active">New contact</li>;
+  }
+
   const { active, contact, onClick } = props;
 
   return (

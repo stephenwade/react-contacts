@@ -21,10 +21,13 @@ export const newNewEmail = (): NewEmail => ({
   email: '',
 });
 
-export type NewContact = Partial<Contact & { newEmails: NewEmail[] }>;
+export type EditingContact = Partial<
+  Contact & { new: boolean; newEmails: NewEmail[] }
+>;
 
 export enum ActionType {
   ContactsLoaded,
+  ContactNew,
   ContactSelect,
   ContactSet,
   Error,
@@ -36,6 +39,7 @@ export type BasicAction =
   | {
       type:
         | ActionType.Error
+        | ActionType.ContactNew
         | ActionType.LoadingStarted
         | ActionType.LoadingFinished;
     }
@@ -49,7 +53,7 @@ export type BasicAction =
     }
   | {
       type: ActionType.ContactSet;
-      contact: NewContact;
+      contact: EditingContact;
     };
 
 export type AppThunkAction = ThunkAction<void, AppState, unknown, BasicAction>;

@@ -5,7 +5,7 @@ import {
   AppThunkAction,
   BasicAction,
   Contact,
-  NewContact,
+  EditingContact,
 } from '../types';
 
 const CONTACTS_ENDPOINT = 'https://avb-contacts-api.herokuapp.com/contacts';
@@ -34,6 +34,10 @@ export const loadContacts = (): AppThunkAction => async (dispatch) => {
   dispatch(loadingFinished());
 };
 
+export const newContact = (): BasicAction => ({
+  type: ActionType.ContactNew,
+});
+
 export const selectContact = (id: number): BasicAction => ({
   type: ActionType.ContactSelect,
   id,
@@ -44,7 +48,7 @@ export const unselectContact = (): BasicAction => ({
   id: undefined,
 });
 
-export const setActiveContact = (contact: NewContact): BasicAction => ({
+export const setActiveContact = (contact: EditingContact): BasicAction => ({
   type: ActionType.ContactSet,
   contact,
 });

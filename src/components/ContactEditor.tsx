@@ -5,7 +5,7 @@ import EmailsInput from './EmailsInput';
 import LabelContainer from './LabelContainer';
 import TextInput from './TextInput';
 import { useAppDispatch, useAppSelector } from '../store';
-import { setActiveContact } from '../actions/contacts';
+import { newContact, setActiveContact } from '../actions/contacts';
 import { newNewEmail } from '../types';
 
 import './ContactEditor.css';
@@ -108,7 +108,8 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
               <>Loading…</>
             ) : (
               <>
-                Click a contact to view or edit it. Click <AddButton /> to add a
+                Click a contact to view or edit it. Click{' '}
+                <AddButton onClick={() => dispatch(newContact())} /> to add a
                 new contact.
               </>
             )}

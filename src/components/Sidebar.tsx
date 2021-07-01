@@ -3,7 +3,11 @@ import React from 'react';
 import AddButton from './AddButton';
 import SidebarListItem from './SidebarListItem';
 import { useAppDispatch, useAppSelector } from '../store';
-import { selectContact, unselectContact } from '../actions/contacts';
+import {
+  newContact,
+  selectContact,
+  unselectContact,
+} from '../actions/contacts';
 
 import './Sidebar.css';
 
@@ -37,7 +41,7 @@ function Sidebar(): JSX.Element {
   return (
     <div className="Sidebar">
       <h1>Contacts</h1>
-      <AddButton />
+      <AddButton onClick={() => dispatch(newContact())} />
       <ul>
         {contacts.map((contact) => (
           <SidebarListItem
@@ -47,6 +51,9 @@ function Sidebar(): JSX.Element {
             onClick={() => onContactClick(contact.id)}
           />
         ))}
+        {activeContact && !('id' in activeContact) ? (
+          <SidebarListItem new />
+        ) : null}
       </ul>
     </div>
   );
