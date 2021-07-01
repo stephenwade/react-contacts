@@ -1,17 +1,17 @@
 import { Reducer } from 'redux';
 
-import { ActionType, BasicAction, Contact } from '../types';
+import { ActionType, BasicAction, Contact, NewContact } from '../types';
 
 const contactsReducer: Reducer<
   {
     contacts: Contact[];
-    activeId: number | null;
+    activeContact: NewContact | undefined;
   },
   BasicAction
 > = (
   state = {
     contacts: [],
-    activeId: null,
+    activeContact: undefined,
   },
   action
 ) => {
@@ -19,8 +19,19 @@ const contactsReducer: Reducer<
     case ActionType.ContactsLoaded:
       return { ...state, contacts: action.contacts };
 
-    case ActionType.ContactSelect:
-      return { ...state, activeId: action.id };
+    case ActionType.ContactSelect: {
+      const activeContact = state.contacts.find(
+        (contact) => contact.id === action.id
+      );
+      return { ...state, activeContact };
+    }
+
+    case ActionType.ContactSet: {
+      return {
+        ...state,
+        activeContact: { ...state.activeContact, ...action.contact },
+      };
+    }
   }
 
   return state;

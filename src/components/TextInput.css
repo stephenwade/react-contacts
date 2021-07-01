@@ -4,3 +4,8 @@
   border: 1px solid var(--primary-color-2);
   background-color: var(--background-color-2);
 }
+
+.TextInput.error > input {
+  border-color: var(--alert-color-2);
+  background-color: var(--alert-background-color);
+}

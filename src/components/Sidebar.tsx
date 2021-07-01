@@ -8,7 +8,9 @@ import { selectContact, unselectContact } from '../actions/contacts';
 import './Sidebar.css';
 
 function Sidebar(): JSX.Element {
-  const { contacts, activeId } = useAppSelector((state) => state.contacts);
+  const { contacts, activeContact } = useAppSelector((state) => state.contacts);
+  const activeId = activeContact?.id;
+
   const dispatch = useAppDispatch();
 
   const onContactClick = (contactId: number) => {

@@ -2,24 +2,55 @@ import React from 'react';
 
 import AddButton from './AddButton';
 import RemoveButton from './RemoveButton';
+import TextInput from './TextInput';
 
 import './EmailsInputListItem.css';
 
 function EmailsInputListItem(
-  props: { email: string } | { new: boolean }
+  props:
+    | {
+        email: string;
+        onRemoveClick: React.MouseEventHandler<HTMLSpanElement>;
+      }
+    | {
+        add: true;
+        onAddClick: React.MouseEventHandler<HTMLLIElement>;
+      }
+    | {
+        new: true;
+        value: string;
+        onChange: React.ChangeEventHandler<HTMLInputElement>;
+        onRemoveClick: React.MouseEventHandler<HTMLSpanElement>;
+      }
 ): JSX.Element {
   if ('new' in props) {
+    const { value, onChange, onRemoveClick } = props;
+
     return (
       <li className="EmailsInputListItem new">
-        <AddButton /> add email
+        <TextInput value={value} onChange={onChange} />
+        <RemoveButton onClick={onRemoveClick} />
       </li>
     );
   }
-  const { email } = props;
+
+  if ('add' in props) {
+    const { onAddClick } = props;
+
+    return (
+      <li className="EmailsInputListItem add" onClick={onAddClick}>
+        <span>
+          <AddButton /> add email
+        </span>
+      </li>
+    );
+  }
+
+  const { email, onRemoveClick } = props;
 
   return (
     <li className="EmailsInputListItem">
-      {email} <RemoveButton />
+      {email} <RemoveButton onClick={onRemoveClick} />
     </li>
   );
 }
