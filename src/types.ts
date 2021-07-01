@@ -25,6 +25,23 @@ export type EditingContact = Partial<
   Contact & { new: boolean; newEmails: NewEmail[] }
 >;
 
+export type ContactRequest = Omit<Contact, 'id'>;
+
+export const prepareContactForRequest = (
+  editingContact: EditingContact
+): ContactRequest => {
+  const { firstName, lastName, emails, newEmails } = editingContact;
+
+  return {
+    firstName: firstName || '',
+    lastName: lastName || '',
+    emails: [
+      ...(emails || []),
+      ...(newEmails?.map((newEmail) => newEmail.email) || []),
+    ],
+  };
+};
+
 export enum ActionType {
   ContactsLoaded,
   ContactNew,
@@ -35,6 +52,9 @@ export enum ActionType {
   LoadingFinished,
   DeleteStarted,
   DeleteFinished,
+  SaveStarted,
+  SaveFinished,
+  SaveCanceled,
 }
 
 export type BasicAction =
@@ -44,7 +64,9 @@ export type BasicAction =
         | ActionType.ContactNew
         | ActionType.LoadingStarted
         | ActionType.LoadingFinished
-        | ActionType.DeleteStarted;
+        | ActionType.DeleteStarted
+        | ActionType.SaveStarted
+        | ActionType.SaveCanceled;
     }
   | {
       type: ActionType.ContactsLoaded;
@@ -61,6 +83,10 @@ export type BasicAction =
   | {
       type: ActionType.DeleteFinished;
       id: number;
+    }
+  | {
+      type: ActionType.SaveFinished;
+      contact: Contact;
     };
 
 export type AppThunkAction = ThunkAction<void, AppState, unknown, BasicAction>;

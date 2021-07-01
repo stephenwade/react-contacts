@@ -5,7 +5,9 @@ import {
   AppThunkAction,
   BasicAction,
   Contact,
+  ContactRequest,
   EditingContact,
+  prepareContactForRequest,
 } from '../types';
 
 const CONTACTS_ENDPOINT = 'https://avb-contacts-api.herokuapp.com/contacts';
@@ -29,13 +31,46 @@ const deleteContactAPI = async (id: number): Promise<void> => {
   }
 };
 
+const saveNewContactAPI = async (
+  contactRequest: ContactRequest
+): Promise<Contact> => {
+  const result = await fetch(CONTACTS_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(contactRequest),
+  });
+  if (!result.ok) {
+    throw new Error();
+  }
+
+  const contact = (await result.json()) as Contact;
+  return contact;
+};
+
+const saveExistingContactAPI = async (
+  contactRequest: ContactRequest,
+  id: number
+): Promise<Contact> => {
+  const result = await fetch(`${CONTACTS_ENDPOINT}/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(contactRequest),
+  });
+  if (!result.ok) {
+    throw new Error();
+  }
+
+  const contact = (await result.json()) as Contact;
+  return contact;
+};
+
 export const loadContacts = (): AppThunkAction => async (dispatch) => {
   dispatch(loadingStarted());
 
   try {
     const contacts = await loadDataAPI();
     dispatch({ type: ActionType.ContactsLoaded, contacts });
-  } catch (e) {
+  } catch {
     dispatch(error());
   }
 
@@ -68,10 +103,37 @@ export const deleteContact =
 
     try {
       await deleteContactAPI(id);
-    } catch (e) {
+    } catch {
       dispatch(error());
     }
 
     dispatch({ type: ActionType.DeleteFinished, id });
     dispatch(unselectContact());
+  };
+
+export const saveContact =
+  (partialContact: EditingContact): AppThunkAction =>
+  async (dispatch) => {
+    dispatch({ type: ActionType.SaveStarted });
+
+    const id = partialContact.id;
+    try {
+      if (!id) {
+        const contact = await saveNewContactAPI(
+          prepareContactForRequest(partialContact)
+        );
+
+        dispatch({ type: ActionType.SaveFinished, contact });
+      } else {
+        const contact = await saveExistingContactAPI(
+          prepareContactForRequest(partialContact),
+          id
+        );
+
+        dispatch({ type: ActionType.SaveFinished, contact });
+      }
+    } catch {
+      dispatch(error());
+      dispatch({ type: ActionType.SaveCanceled });
+    }
   };

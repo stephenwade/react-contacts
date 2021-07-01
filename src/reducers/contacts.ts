@@ -7,6 +7,7 @@ const contactsReducer: Reducer<
     contacts: Contact[];
     activeContact: EditingContact | undefined;
     deleteInProgress: boolean;
+    saveInProgress: boolean;
   },
   BasicAction
 > = (
@@ -14,6 +15,7 @@ const contactsReducer: Reducer<
     contacts: [],
     activeContact: undefined,
     deleteInProgress: false,
+    saveInProgress: false,
   },
   action
 ) => {
@@ -21,12 +23,11 @@ const contactsReducer: Reducer<
     case ActionType.ContactsLoaded:
       return { ...state, contacts: action.contacts };
 
-    case ActionType.ContactNew: {
+    case ActionType.ContactNew:
       if (!state.activeContact?.new) {
         return { ...state, activeContact: { new: true } };
       }
       return state;
-    }
 
     case ActionType.ContactSelect: {
       const activeContact = state.contacts.find(
@@ -35,24 +36,40 @@ const contactsReducer: Reducer<
       return { ...state, activeContact };
     }
 
-    case ActionType.ContactSet: {
+    case ActionType.ContactSet:
       return {
         ...state,
         activeContact: { ...state.activeContact, ...action.contact },
       };
-    }
 
-    case ActionType.DeleteStarted: {
+    case ActionType.DeleteStarted:
       return { ...state, deleteInProgress: true };
-    }
 
-    case ActionType.DeleteFinished: {
+    case ActionType.DeleteFinished:
       return {
         ...state,
         contacts: state.contacts.filter((contact) => contact.id !== action.id),
         deleteInProgress: false,
       };
-    }
+
+    case ActionType.SaveStarted:
+      return { ...state, saveInProgress: true };
+
+    case ActionType.SaveFinished:
+      return {
+        ...state,
+        contacts: [
+          ...state.contacts.filter(
+            (contact) => contact.id !== action.contact.id
+          ),
+          action.contact,
+        ],
+        activeContact: action.contact,
+        saveInProgress: false,
+      };
+
+    case ActionType.SaveCanceled:
+      return { ...state, saveInProgress: false };
   }
 
   return state;

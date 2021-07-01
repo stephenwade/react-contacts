@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../store';
 import {
   deleteContact,
   newContact,
+  saveContact,
   setActiveContact,
   unselectContact,
 } from '../actions/contacts';
@@ -16,7 +17,7 @@ import { newNewEmail } from '../types';
 import './ContactEditor.css';
 
 function ContactEditor(props: { loading: boolean }): JSX.Element {
-  const { activeContact, deleteInProgress } = useAppSelector(
+  const { activeContact, deleteInProgress, saveInProgress } = useAppSelector(
     (state) => state.contacts
   );
   const dispatch = useAppDispatch();
@@ -119,7 +120,15 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
               >
                 Cancel
               </button>
-              <button className="primary">Save</button>
+              <button
+                className="primary"
+                onClick={() => {
+                  if (saveInProgress) return;
+                  dispatch(saveContact(activeContact));
+                }}
+              >
+                {saveInProgress ? 'Saving…' : 'Save'}
+              </button>
             </div>
           </div>
         </>
