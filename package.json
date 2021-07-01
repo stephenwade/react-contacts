@@ -11,14 +11,15 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
+    "lint:types": "tsc",
     "lint:eslint": "eslint . --ignore-path .gitignore",
     "lint:stylelint": "stylelint \"**/*.css\" --ignore-path .gitignore",
     "lint:prettier": "prettier . --check --ignore-path .gitignore --loglevel warn",
-    "lint": "npm run lint:eslint && npm run lint:stylelint && npm run lint:prettier",
+    "lint": "npm run lint:types && npm run lint:eslint && npm run lint:stylelint && npm run lint:prettier",
     "format:eslint": "eslint . --fix --ignore-path .gitignore",
     "format:stylelint": "stylelint \"**/*.css\" --fix --ignore-path .gitignore",
     "format:prettier": "prettier . --write --ignore-path .gitignore --loglevel warn",
-    "format": "npm run format:eslint; npm run format:stylelint; npm run format:prettier",
+    "format": "npm run lint:types; npm run format:eslint; npm run format:stylelint; npm run format:prettier",
     "prepare": "husky install"
   },
   "dependencies": {
