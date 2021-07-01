@@ -11,11 +11,13 @@ import {
 
 import './Sidebar.css';
 
-function Sidebar(): JSX.Element {
+function Sidebar(props: { loading: boolean }): JSX.Element {
   const { contacts, activeContact } = useAppSelector((state) => state.contacts);
   const activeId = activeContact?.id;
 
   const dispatch = useAppDispatch();
+
+  const { loading } = props;
 
   const onContactClick = (contactId: number) => {
     const active = contactId === activeId;
@@ -41,7 +43,7 @@ function Sidebar(): JSX.Element {
   return (
     <div className="Sidebar">
       <h1>Contacts</h1>
-      <AddButton onClick={() => dispatch(newContact())} />
+      {loading ? null : <AddButton onClick={() => dispatch(newContact())} />}
       <ul>
         {contacts.map((contact) => (
           <SidebarListItem

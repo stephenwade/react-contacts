@@ -28,7 +28,7 @@ function App(): JSX.Element {
   return (
     <div className="App">
       <Toaster />
-      <Sidebar />
+      <Sidebar loading={loading} />
       <ContactEditor loading={loading} />
     </div>
   );
