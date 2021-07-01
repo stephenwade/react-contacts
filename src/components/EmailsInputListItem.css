@@ -10,6 +10,10 @@
   cursor: pointer;
 }
 
+.EmailsInputListItem:not(:hover) > .RemoveButton {
+  visibility: hidden;
+}
+
 .EmailsInputListItem.add {
   cursor: pointer;
 }
