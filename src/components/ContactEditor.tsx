@@ -5,7 +5,11 @@ import EmailsInput from './EmailsInput';
 import LabelContainer from './LabelContainer';
 import TextInput from './TextInput';
 import { useAppDispatch, useAppSelector } from '../store';
-import { newContact, setActiveContact } from '../actions/contacts';
+import {
+  newContact,
+  setActiveContact,
+  unselectContact,
+} from '../actions/contacts';
 import { newNewEmail } from '../types';
 
 import './ContactEditor.css';
@@ -96,7 +100,12 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
               <button className="destructive">Delete</button>
             </div>
             <div className="ButtonsGroup">
-              <button className="secondary">Cancel</button>
+              <button
+                className="secondary"
+                onClick={() => dispatch(unselectContact())}
+              >
+                Cancel
+              </button>
               <button className="primary">Save</button>
             </div>
           </div>
