@@ -6,6 +6,7 @@ import LabelContainer from './LabelContainer';
 import TextInput from './TextInput';
 import { useAppDispatch, useAppSelector } from '../store';
 import {
+  deleteContact,
   newContact,
   setActiveContact,
   unselectContact,
@@ -15,7 +16,9 @@ import { newNewEmail } from '../types';
 import './ContactEditor.css';
 
 function ContactEditor(props: { loading: boolean }): JSX.Element {
-  const { activeContact } = useAppSelector((state) => state.contacts);
+  const { activeContact, deleteInProgress } = useAppSelector(
+    (state) => state.contacts
+  );
   const dispatch = useAppDispatch();
 
   const { loading } = props;
@@ -97,7 +100,17 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
           </div>
           <div className="ButtonsRow">
             <div className="ButtonsGroup">
-              <button className="destructive">Delete</button>
+              <button
+                className="destructive"
+                onClick={() => {
+                  if (deleteInProgress) return;
+                  if (activeContact.id !== undefined)
+                    dispatch(deleteContact(activeContact.id));
+                  else dispatch(unselectContact());
+                }}
+              >
+                {deleteInProgress ? 'Deleting…' : 'Delete'}
+              </button>
             </div>
             <div className="ButtonsGroup">
               <button

@@ -6,12 +6,14 @@ const contactsReducer: Reducer<
   {
     contacts: Contact[];
     activeContact: EditingContact | undefined;
+    deleteInProgress: boolean;
   },
   BasicAction
 > = (
   state = {
     contacts: [],
     activeContact: undefined,
+    deleteInProgress: false,
   },
   action
 ) => {
@@ -37,6 +39,18 @@ const contactsReducer: Reducer<
       return {
         ...state,
         activeContact: { ...state.activeContact, ...action.contact },
+      };
+    }
+
+    case ActionType.DeleteStarted: {
+      return { ...state, deleteInProgress: true };
+    }
+
+    case ActionType.DeleteFinished: {
+      return {
+        ...state,
+        contacts: state.contacts.filter((contact) => contact.id !== action.id),
+        deleteInProgress: false,
       };
     }
   }

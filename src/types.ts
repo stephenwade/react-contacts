@@ -33,6 +33,8 @@ export enum ActionType {
   Error,
   LoadingStarted,
   LoadingFinished,
+  DeleteStarted,
+  DeleteFinished,
 }
 
 export type BasicAction =
@@ -41,7 +43,8 @@ export type BasicAction =
         | ActionType.Error
         | ActionType.ContactNew
         | ActionType.LoadingStarted
-        | ActionType.LoadingFinished;
+        | ActionType.LoadingFinished
+        | ActionType.DeleteStarted;
     }
   | {
       type: ActionType.ContactsLoaded;
@@ -54,6 +57,10 @@ export type BasicAction =
   | {
       type: ActionType.ContactSet;
       contact: EditingContact;
+    }
+  | {
+      type: ActionType.DeleteFinished;
+      id: number;
     };
 
 export type AppThunkAction = ThunkAction<void, AppState, unknown, BasicAction>;

@@ -20,3 +20,5 @@ ReactDOM.render(
 );
 
 (store.dispatch as ThunkDispatch<AppState, never, BasicAction>)(loadContacts());
+
+// TODO: Every 5 minutes, if the ContactEditor is not dirty, reload contacts

@@ -10,7 +10,7 @@ import {
 
 const CONTACTS_ENDPOINT = 'https://avb-contacts-api.herokuapp.com/contacts';
 
-const loadData = async (): Promise<Contact[]> => {
+const loadDataAPI = async (): Promise<Contact[]> => {
   const result = await fetch(CONTACTS_ENDPOINT);
   if (!result.ok) {
     throw new Error();
@@ -20,15 +20,23 @@ const loadData = async (): Promise<Contact[]> => {
   return contacts;
 };
 
+const deleteContactAPI = async (id: number): Promise<void> => {
+  const result = await fetch(`${CONTACTS_ENDPOINT}/${id}`, {
+    method: 'DELETE',
+  });
+  if (!result.ok) {
+    throw new Error();
+  }
+};
+
 export const loadContacts = (): AppThunkAction => async (dispatch) => {
   dispatch(loadingStarted());
 
   try {
-    const contacts = await loadData();
+    const contacts = await loadDataAPI();
     dispatch({ type: ActionType.ContactsLoaded, contacts });
   } catch (e) {
     dispatch(error());
-    throw e;
   }
 
   dispatch(loadingFinished());
@@ -52,3 +60,18 @@ export const setActiveContact = (contact: EditingContact): BasicAction => ({
   type: ActionType.ContactSet,
   contact,
 });
+
+export const deleteContact =
+  (id: number): AppThunkAction =>
+  async (dispatch) => {
+    dispatch({ type: ActionType.DeleteStarted });
+
+    try {
+      await deleteContactAPI(id);
+    } catch (e) {
+      dispatch(error());
+    }
+
+    dispatch({ type: ActionType.DeleteFinished, id });
+    dispatch(unselectContact());
+  };
