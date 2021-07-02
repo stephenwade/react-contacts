@@ -2,9 +2,7 @@ import React from 'react';
 
 import './AddButton.css';
 
-function AddButton(props: {
-  onClick?: React.MouseEventHandler<HTMLSpanElement>;
-}): JSX.Element {
+function AddButton(props: { onClick?: () => void }): JSX.Element {
   const { onClick } = props;
 
   return (

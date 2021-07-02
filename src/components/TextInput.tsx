@@ -6,7 +6,7 @@ function TextInput(
   props: {
     value: string;
     required?: boolean;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
+    onChange: (value: string) => void;
   } & React.AriaAttributes
 ): JSX.Element {
   const { value, required, onChange, ...aria } = props;
@@ -28,7 +28,7 @@ function TextInput(
 
     setCurrentValue(e.target.value);
 
-    onChange(e);
+    onChange(e.target.value);
   };
 
   return (

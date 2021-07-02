@@ -33,8 +33,8 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
               <TextInput
                 value={activeContact.firstName || ''}
                 required
-                onChange={(e) =>
-                  dispatch(setActiveContact({ firstName: e.target.value }))
+                onChange={(value) =>
+                  dispatch(setActiveContact({ firstName: value }))
                 }
               />
             </LabelContainer>
@@ -42,8 +42,8 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
               <TextInput
                 value={activeContact.lastName || ''}
                 required
-                onChange={(e) =>
-                  dispatch(setActiveContact({ lastName: e.target.value }))
+                onChange={(value) =>
+                  dispatch(setActiveContact({ lastName: value }))
                 }
               />
             </LabelContainer>
@@ -63,7 +63,7 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
                     })
                   )
                 }
-                onNewEmailChange={(newEmailKey) => (e) => {
+                onNewEmailChange={(newEmailKey, email) => {
                   if (activeContact.newEmails) {
                     const newEmails = [...activeContact.newEmails];
                     const newEmailIndex = newEmails.findIndex(
@@ -71,12 +71,12 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
                     );
                     newEmails[newEmailIndex] = {
                       ...newEmails[newEmailIndex],
-                      email: e.target.value,
+                      email,
                     };
                     dispatch(setActiveContact({ newEmails }));
                   }
                 }}
-                onEmailRemoveClick={(emailIndex) => () => {
+                onEmailRemoveClick={(emailIndex) => {
                   if (
                     activeContact.emails &&
                     activeContact.emails.length > emailIndex
@@ -86,7 +86,7 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
                     dispatch(setActiveContact({ emails }));
                   }
                 }}
-                onNewEmailRemoveClick={(newEmailKey) => () => {
+                onNewEmailRemoveClick={(newEmailKey) => {
                   if (activeContact.newEmails) {
                     const newEmails = [...activeContact.newEmails];
                     const newEmailIndex = newEmails.findIndex(

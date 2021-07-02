@@ -9,16 +9,10 @@ function EmailsInput(
   props: {
     emails: string[];
     newEmails: NewEmail[];
-    onAddEmailClick: React.MouseEventHandler<HTMLLIElement>;
-    onNewEmailChange: (
-      key: string
-    ) => React.ChangeEventHandler<HTMLInputElement>;
-    onEmailRemoveClick: (
-      index: number
-    ) => React.MouseEventHandler<HTMLSpanElement>;
-    onNewEmailRemoveClick: (
-      key: string
-    ) => React.MouseEventHandler<HTMLSpanElement>;
+    onAddEmailClick: () => void;
+    onNewEmailChange: (key: string, value: string) => void;
+    onEmailRemoveClick: (index: number) => void;
+    onNewEmailRemoveClick: (key: string) => void;
   } & React.AriaAttributes
 ): JSX.Element {
   const {
@@ -38,7 +32,7 @@ function EmailsInput(
           <EmailsInputListItem
             key={`existing ${email} ${i}`}
             email={email}
-            onRemoveClick={onEmailRemoveClick(i)}
+            onRemoveClick={() => onEmailRemoveClick(i)}
           />
         ))}
         {newEmails.map((email) => (
@@ -46,8 +40,8 @@ function EmailsInput(
             new
             key={`new ${email.id}`}
             email={email.id}
-            onChange={onNewEmailChange(email.id)}
-            onRemoveClick={onNewEmailRemoveClick(email.id)}
+            onChange={(value) => onNewEmailChange(email.id, value)}
+            onRemoveClick={() => onNewEmailRemoveClick(email.id)}
           />
         ))}
         <EmailsInputListItem add onAddClick={onAddEmailClick} />

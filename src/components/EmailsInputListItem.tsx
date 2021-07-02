@@ -10,17 +10,17 @@ function EmailsInputListItem(
   props:
     | {
         email: string;
-        onRemoveClick: React.MouseEventHandler<HTMLSpanElement>;
+        onRemoveClick: () => void;
       }
     | {
         add: true;
-        onAddClick: React.MouseEventHandler<HTMLLIElement>;
+        onAddClick: () => void;
       }
     | {
         new: true;
         value: string;
-        onChange: React.ChangeEventHandler<HTMLInputElement>;
-        onRemoveClick: React.MouseEventHandler<HTMLSpanElement>;
+        onChange: (value: string) => void;
+        onRemoveClick: () => void;
       }
 ): JSX.Element {
   if ('new' in props) {

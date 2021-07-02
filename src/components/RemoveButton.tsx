@@ -2,9 +2,7 @@ import React from 'react';
 
 import './RemoveButton.css';
 
-function RemoveButton(props: {
-  onClick: React.MouseEventHandler<HTMLSpanElement>;
-}): JSX.Element {
+function RemoveButton(props: { onClick: () => void }): JSX.Element {
   const { onClick } = props;
 
   return (

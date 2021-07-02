@@ -9,7 +9,7 @@ function SidebarListItem(
     | {
         contact: Contact;
         active: boolean;
-        onClick?: React.MouseEventHandler<HTMLLIElement>;
+        onClick?: () => void;
       }
     | { new: true }
 ): JSX.Element {
