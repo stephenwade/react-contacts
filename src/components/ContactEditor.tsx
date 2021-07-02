@@ -118,21 +118,6 @@ const ContactEditor = React.forwardRef<HTMLInputElement, Props>(
             <div className="ButtonsRow">
               <div className="ButtonsGroup">
                 <button
-                  className="destructive"
-                  onClick={() => setShowDialog(true)}
-                >
-                  {deleteInProgress ? 'Deleting…' : 'Delete'}
-                </button>
-              </div>
-              <div className="ButtonsGroup">
-                <button
-                  className="secondary"
-                  // TODO: Check if ContactEditor is dirty and ask for confirmation
-                  onClick={() => dispatch(unselectContact())}
-                >
-                  Cancel
-                </button>
-                <button
                   className="primary"
                   onClick={() => {
                     if (saveInProgress) return;
@@ -142,6 +127,21 @@ const ContactEditor = React.forwardRef<HTMLInputElement, Props>(
                   }}
                 >
                   {saveInProgress ? 'Saving…' : 'Save'}
+                </button>
+                <button
+                  className="secondary"
+                  // TODO: Check if ContactEditor is dirty and ask for confirmation
+                  onClick={() => dispatch(unselectContact())}
+                >
+                  Cancel
+                </button>
+              </div>
+              <div className="ButtonsGroup">
+                <button
+                  className="destructive"
+                  onClick={() => setShowDialog(true)}
+                >
+                  {deleteInProgress ? 'Deleting…' : 'Delete'}
                 </button>
               </div>
             </div>
