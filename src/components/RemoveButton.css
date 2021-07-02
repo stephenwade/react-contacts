@@ -1,4 +1,11 @@
+.RemoveButton {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
 .RemoveButton svg {
+  display: block;
   width: 1em;
   height: 1em;
 }

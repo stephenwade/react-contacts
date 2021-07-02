@@ -2,7 +2,8 @@
   --horizontal-padding: 20px;
 
   position: relative;
-  width: 228px;
+  flex-shrink: 0;
+  flex-basis: 228px;
   padding: 14px 0;
   background-color: var(--background-color);
 }

@@ -53,9 +53,10 @@
   margin-left: -32px;
 }
 
-.ContactEditor button,
-.DialogButtonsRow button {
+.DialogButtonsRow button,
+.ContactEditor > .ButtonsRow button {
   min-width: 120px;
+  margin-left: 32px;
   padding: 6px 12px;
   cursor: pointer;
 }
@@ -78,11 +79,6 @@
   border: 1px solid var(--alert-color);
   background-color: var(--alert-color);
   color: white;
-}
-
-.DialogButtonsRow button,
-.ContactEditor > .ButtonsRow button {
-  margin-left: 32px;
 }
 
 .DialogButtonsRow {

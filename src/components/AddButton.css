@@ -1,4 +1,11 @@
+.AddButton {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
 .AddButton svg {
+  display: block;
   width: 1em;
   height: 1em;
 }
