@@ -41,6 +41,7 @@ const ContactEditor = React.forwardRef<HTMLInputElement, Props>(
                 <TextInput
                   ref={firstInputRef}
                   value={activeContact.firstName || ''}
+                  autoFocus
                   onChange={(value) => {
                     dispatch(editorDirty());
                     dispatch(setActiveContact({ firstName: value }));

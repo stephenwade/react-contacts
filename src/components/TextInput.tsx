@@ -4,6 +4,7 @@ import './TextInput.css';
 
 type Props = {
   value: string;
+  autoFocus?: boolean;
   onChange: (value: string) => void;
   validator?: (value: string, oldValue?: string) => boolean;
 } & React.AriaAttributes;
@@ -12,7 +13,7 @@ const TextInput = React.forwardRef<HTMLInputElement, Props>(function TextInput(
   props: Props,
   ref
 ): JSX.Element {
-  const { value, onChange, validator, ...aria } = props;
+  const { value, autoFocus, onChange, validator, ...aria } = props;
 
   const [oldValue, setOldValue] = useState<string>(value);
   const [valid, setValid] = useState(true);
@@ -34,6 +35,7 @@ const TextInput = React.forwardRef<HTMLInputElement, Props>(function TextInput(
       className={`TextInput ${valid ? '' : 'error'}`}
       type="text"
       value={value}
+      autoFocus={autoFocus}
       onChange={onInputChange}
       {...aria}
     />
