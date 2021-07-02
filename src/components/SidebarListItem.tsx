@@ -14,7 +14,11 @@ function SidebarListItem(
     | { new: true }
 ): JSX.Element {
   if ('new' in props) {
-    return <li className="SidebarListItem new active">New contact</li>;
+    return (
+      <li className="SidebarListItem new active" tabIndex={0}>
+        New contact
+      </li>
+    );
   }
 
   const { active, contact, onClick } = props;
@@ -23,6 +27,14 @@ function SidebarListItem(
     <li
       className={`SidebarListItem ${active ? 'active' : ''}`}
       onClick={onClick}
+      onKeyDown={
+        onClick
+          ? (e) => {
+              if (e.key === 'Enter') onClick();
+            }
+          : undefined
+      }
+      tabIndex={0}
     >
       {contact.firstName} {contact.lastName}
     </li>
