@@ -1,4 +1,4 @@
-.App {
+html {
   --primary-color: #579aff;
   --primary-color-2: #d7e7ff;
   --background-color: #f8faff;
@@ -9,7 +9,9 @@
   --heading-color: #000;
   --text-color: #444;
   --text-color-2: #555;
+}
 
+.App {
   display: flex;
   align-items: stretch;
   min-height: 100vh;

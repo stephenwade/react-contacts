@@ -6,6 +6,7 @@ const contactsReducer: Reducer<
   {
     contacts: Contact[];
     activeContact: EditingContact | undefined;
+    editorDirty: boolean;
     deleteInProgress: boolean;
     saveInProgress: boolean;
     hasTriedToSave: boolean;
@@ -15,6 +16,7 @@ const contactsReducer: Reducer<
   state = {
     contacts: [],
     activeContact: undefined,
+    editorDirty: false,
     deleteInProgress: false,
     saveInProgress: false,
     hasTriedToSave: false,
@@ -43,6 +45,9 @@ const contactsReducer: Reducer<
         ...state,
         activeContact: { ...state.activeContact, ...action.contact },
       };
+
+    case ActionType.EditorDirty:
+      return { ...state, editorDirty: true };
 
     case ActionType.DeleteStarted:
       return { ...state, deleteInProgress: true };

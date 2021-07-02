@@ -62,6 +62,7 @@ export enum ActionType {
   Error,
   LoadingStarted,
   LoadingFinished,
+  EditorDirty,
   DeleteStarted,
   DeleteFinished,
   SaveStarted,
@@ -77,6 +78,7 @@ export type BasicAction =
         | ActionType.ContactNew
         | ActionType.LoadingStarted
         | ActionType.LoadingFinished
+        | ActionType.EditorDirty
         | ActionType.DeleteStarted
         | ActionType.SaveStarted
         | ActionType.SaveCanceled

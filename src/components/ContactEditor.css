@@ -53,29 +53,41 @@
   margin-left: -32px;
 }
 
-.ContactEditor button {
+.ContactEditor button,
+.DialogButtonsRow button {
   min-width: 120px;
   padding: 6px 12px;
   cursor: pointer;
 }
 
-.ContactEditor button.primary {
+.ContactEditor button.primary,
+.DialogButtonsRow button.primary {
   border: 1px solid var(--primary-color);
   background-color: var(--primary-color);
   color: white;
 }
 
-.ContactEditor button.secondary {
+.ContactEditor button.secondary,
+.DialogButtonsRow button.secondary {
   border: 1px solid var(--primary-color);
   background-color: var(--background-color-2);
 }
 
-.ContactEditor button.destructive {
+.ContactEditor button.destructive,
+.DialogButtonsRow button.destructive {
   border: 1px solid var(--alert-color);
   background-color: var(--alert-color);
   color: white;
 }
 
+.DialogButtonsRow button,
 .ContactEditor > .ButtonsRow button {
   margin-left: 32px;
+}
+
+.DialogButtonsRow {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  margin-top: 1rem;
 }

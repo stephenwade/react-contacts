@@ -23,6 +23,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@reach/dialog": "^0.15.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-hot-toast": "^2.0.0",

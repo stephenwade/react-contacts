@@ -96,6 +96,10 @@ export const setActiveContact = (contact: EditingContact): BasicAction => ({
   contact,
 });
 
+export const editorDirty = (): BasicAction => ({
+  type: ActionType.EditorDirty,
+});
+
 export const deleteContact =
   (id: number): AppThunkAction =>
   async (dispatch) => {

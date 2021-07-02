@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Dialog } from '@reach/dialog';
 
 import AddButton from './AddButton';
 import EmailsInput from './EmailsInput';
@@ -7,6 +8,7 @@ import TextInput, { required } from './TextInput';
 import { useAppDispatch, useAppSelector } from '../store';
 import {
   deleteContact,
+  editorDirty,
   newContact,
   saveContact,
   setActiveContact,
@@ -16,11 +18,14 @@ import {
 import { isValidContact, newNewEmail } from '../types';
 
 import './ContactEditor.css';
+import '@reach/dialog/styles.css';
 
 function ContactEditor(props: { loading: boolean }): JSX.Element {
   const { activeContact, deleteInProgress, saveInProgress, hasTriedToSave } =
     useAppSelector((state) => state.contacts);
   const dispatch = useAppDispatch();
+
+  const [showDialog, setShowDialog] = useState(false);
 
   const { loading } = props;
 
@@ -32,18 +37,20 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
             <LabelContainer name="firstName" label="First Name">
               <TextInput
                 value={activeContact.firstName || ''}
-                onChange={(value) =>
-                  dispatch(setActiveContact({ firstName: value }))
-                }
+                onChange={(value) => {
+                  dispatch(editorDirty());
+                  dispatch(setActiveContact({ firstName: value }));
+                }}
                 validator={hasTriedToSave ? required : undefined}
               />
             </LabelContainer>
             <LabelContainer name="lastName" label="Last Name">
               <TextInput
                 value={activeContact.lastName || ''}
-                onChange={(value) =>
-                  dispatch(setActiveContact({ lastName: value }))
-                }
+                onChange={(value) => {
+                  dispatch(editorDirty());
+                  dispatch(setActiveContact({ lastName: value }));
+                }}
                 validator={hasTriedToSave ? required : undefined}
               />
             </LabelContainer>
@@ -54,7 +61,8 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
                 emails={activeContact.emails || []}
                 newEmails={activeContact.newEmails || []}
                 hasTriedToSave={hasTriedToSave}
-                onAddEmailClick={() =>
+                onAddEmailClick={() => {
+                  dispatch(editorDirty());
                   dispatch(
                     setActiveContact({
                       newEmails: [
@@ -62,9 +70,10 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
                         newNewEmail(),
                       ],
                     })
-                  )
-                }
+                  );
+                }}
                 onNewEmailChange={(newEmailKey, email) => {
+                  dispatch(editorDirty());
                   if (activeContact.newEmails) {
                     const newEmails = [...activeContact.newEmails];
                     const newEmailIndex = newEmails.findIndex(
@@ -78,6 +87,7 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
                   }
                 }}
                 onEmailRemoveClick={(emailIndex) => {
+                  dispatch(editorDirty());
                   if (
                     activeContact.emails &&
                     activeContact.emails.length > emailIndex
@@ -88,6 +98,7 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
                   }
                 }}
                 onNewEmailRemoveClick={(newEmailKey) => {
+                  dispatch(editorDirty());
                   if (activeContact.newEmails) {
                     const newEmails = [...activeContact.newEmails];
                     const newEmailIndex = newEmails.findIndex(
@@ -104,12 +115,7 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
             <div className="ButtonsGroup">
               <button
                 className="destructive"
-                onClick={() => {
-                  if (deleteInProgress) return;
-                  if (activeContact.id !== undefined)
-                    dispatch(deleteContact(activeContact.id));
-                  else dispatch(unselectContact());
-                }}
+                onClick={() => setShowDialog(true)}
               >
                 {deleteInProgress ? 'Deleting…' : 'Delete'}
               </button>
@@ -134,6 +140,33 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
               </button>
             </div>
           </div>
+          <Dialog
+            isOpen={showDialog}
+            onDismiss={() => setShowDialog(false)}
+            aria-label="Confirm deletion"
+          >
+            <div>Are you sure you want to delete this contact?</div>
+            <div className="DialogButtonsRow">
+              <button
+                className="destructive"
+                onClick={() => {
+                  if (deleteInProgress) return;
+                  if (activeContact.id !== undefined)
+                    dispatch(deleteContact(activeContact.id));
+                  else dispatch(unselectContact());
+                  setShowDialog(false);
+                }}
+              >
+                Delete
+              </button>
+              <button
+                className="secondary"
+                onClick={() => setShowDialog(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </Dialog>
         </>
       ) : (
         <div className="EmptyMessage">
