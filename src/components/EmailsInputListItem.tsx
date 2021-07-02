@@ -35,7 +35,7 @@ function EmailsInputListItem(
           onChange={onChange}
           validator={hasTriedToSave ? isValidEmailAddress : undefined}
         />
-        <RemoveButton onClick={onRemoveClick} />
+        <RemoveButton tabIndex={0} onClick={onRemoveClick} />
       </li>
     );
   }

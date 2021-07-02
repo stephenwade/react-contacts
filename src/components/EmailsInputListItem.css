@@ -7,11 +7,14 @@
   position: absolute;
   margin-left: 14px;
   font-size: 24px;
+  opacity: 0;
   cursor: pointer;
 }
 
-.EmailsInputListItem:not(:hover) > .RemoveButton {
-  visibility: hidden;
+.RemoveButton:focus,
+.EmailsInputListItem:hover > .RemoveButton,
+.EmailsInputListItem > .TextInput:focus + .RemoveButton {
+  opacity: 1;
 }
 
 .EmailsInputListItem.add {
@@ -34,6 +37,8 @@
   width: calc((100% - 40px) / 2);
 }
 
+/* stylelint-disable no-descending-specificity */
 .EmailsInputListItem.new > .RemoveButton {
   margin-top: 7px;
 }
+/* stylelint-enable no-descending-specificity */
