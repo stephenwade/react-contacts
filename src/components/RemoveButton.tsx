@@ -3,7 +3,7 @@ import React from 'react';
 import './RemoveButton.css';
 
 function RemoveButton(props: {
-  onClick: () => void;
+  onClick?: () => void;
   tabIndex?: number;
 }): JSX.Element {
   const { onClick, tabIndex } = props;

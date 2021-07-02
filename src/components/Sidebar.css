@@ -18,8 +18,8 @@
 
 .Sidebar > .AddButton {
   position: absolute;
-  top: 20px;
-  right: 16px;
+  top: 16px;
+  right: 12px;
   font-size: 32px;
   cursor: pointer;
 }

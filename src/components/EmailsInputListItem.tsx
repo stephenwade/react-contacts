@@ -44,9 +44,15 @@ function EmailsInputListItem(
     const { onAddClick } = props;
 
     return (
-      <li className="EmailsInputListItem add" onClick={onAddClick}>
-        <span>
-          <AddButton /> add email
+      <li className="EmailsInputListItem add">
+        <span
+          onClick={onAddClick}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') onAddClick();
+          }}
+          tabIndex={0}
+        >
+          <AddButton tabIndex={-1} /> add email
         </span>
       </li>
     );
