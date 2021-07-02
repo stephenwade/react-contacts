@@ -1,11 +1,11 @@
-.TextInput > input {
+.TextInput {
   width: 100%;
   padding: 7px 12px;
   border: 1px solid var(--primary-color-2);
   background-color: var(--background-color-2);
 }
 
-.TextInput.error > input {
+.TextInput.error {
   border-color: var(--alert-color-2);
   background-color: var(--alert-background-color);
 }

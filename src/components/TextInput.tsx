@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 import './TextInput.css';
 
-function TextInput(
-  props: {
-    value: string;
-    onChange: (value: string) => void;
-    validator?: (value: string, oldValue?: string) => boolean;
-  } & React.AriaAttributes
+type Props = {
+  value: string;
+  onChange: (value: string) => void;
+  validator?: (value: string, oldValue?: string) => boolean;
+} & React.AriaAttributes;
+
+const TextInput = React.forwardRef<HTMLInputElement, Props>(function TextInput(
+  props: Props,
+  ref
 ): JSX.Element {
   const { value, onChange, validator, ...aria } = props;
 
@@ -26,11 +29,16 @@ function TextInput(
   };
 
   return (
-    <div className={`TextInput ${valid ? '' : 'error'}`} {...aria}>
-      <input type="text" value={value} onChange={onInputChange} />
-    </div>
+    <input
+      ref={ref}
+      className={`TextInput ${valid ? '' : 'error'}`}
+      type="text"
+      value={value}
+      onChange={onInputChange}
+      {...aria}
+    />
   );
-}
+});
 
 export default TextInput;
 

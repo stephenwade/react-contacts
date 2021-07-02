@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Dialog } from '@reach/dialog';
 
 import AddButton from './AddButton';
@@ -26,6 +26,11 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [showDialog, setShowDialog] = useState(false);
+  const firstNameInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    firstNameInput.current?.focus();
+  }, [activeContact?.id]);
 
   const { loading } = props;
 
@@ -36,6 +41,7 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
           <div className="NameRow">
             <LabelContainer name="firstName" label="First Name">
               <TextInput
+                ref={firstNameInput}
                 value={activeContact.firstName || ''}
                 onChange={(value) => {
                   dispatch(editorDirty());
