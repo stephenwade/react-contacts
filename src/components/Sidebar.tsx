@@ -3,30 +3,25 @@ import React from 'react';
 import AddButton from './AddButton';
 import SidebarListItem from './SidebarListItem';
 import { useAppDispatch, useAppSelector } from '../store';
-import {
-  newContact,
-  selectContact,
-  unselectContact,
-} from '../actions/contacts';
+import { newContact, selectContact } from '../actions/contacts';
 
 import './Sidebar.css';
 
-function Sidebar(props: { loading: boolean }): JSX.Element {
+function Sidebar(props: {
+  loading: boolean;
+  onItemClicked?: () => void;
+}): JSX.Element {
   const { contacts, activeContact } = useAppSelector((state) => state.contacts);
   const activeId = activeContact?.id;
 
   const dispatch = useAppDispatch();
 
-  const { loading } = props;
+  const { loading, onItemClicked } = props;
 
   const onContactClick = (contactId: number) => {
     const active = contactId === activeId;
 
-    // TODO: Check if ContactEditor is dirty and ask for confirmation
-
-    if (active) {
-      dispatch(unselectContact());
-    } else {
+    if (!active) {
       dispatch(selectContact(contactId));
     }
   };
@@ -50,11 +45,14 @@ function Sidebar(props: { loading: boolean }): JSX.Element {
             key={contact.id}
             contact={contact}
             active={contact.id === activeId}
-            onClick={() => onContactClick(contact.id)}
+            onClick={() => {
+              onContactClick(contact.id);
+              if (onItemClicked) onItemClicked();
+            }}
           />
         ))}
         {activeContact && !('id' in activeContact) ? (
-          <SidebarListItem new />
+          <SidebarListItem new onClick={onItemClicked} />
         ) : null}
       </ul>
     </div>

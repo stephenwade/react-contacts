@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import Sidebar from './Sidebar';
@@ -10,6 +10,8 @@ import './App.css';
 function App(): JSX.Element {
   const error = useAppSelector((state) => state.error);
   const loading = useAppSelector((state) => state.loading);
+
+  const firstInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (error) {
@@ -30,8 +32,11 @@ function App(): JSX.Element {
   return (
     <div className="App">
       <Toaster />
-      <Sidebar loading={loading} />
-      <ContactEditor loading={loading} />
+      <Sidebar
+        loading={loading}
+        onItemClicked={() => firstInputRef.current?.focus()}
+      />
+      <ContactEditor loading={loading} ref={firstInputRef} />
     </div>
   );
 }
