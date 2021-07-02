@@ -111,6 +111,10 @@ export const deleteContact =
     dispatch(unselectContact());
   };
 
+export const tryingToSave = (): BasicAction => ({
+  type: ActionType.TriedToSave,
+});
+
 export const saveContact =
   (partialContact: EditingContact): AppThunkAction =>
   async (dispatch) => {

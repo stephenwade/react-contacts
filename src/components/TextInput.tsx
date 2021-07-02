@@ -1,41 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './TextInput.css';
 
 function TextInput(
   props: {
     value: string;
-    required?: boolean;
     onChange: (value: string) => void;
+    validator?: (value: string, oldValue?: string) => boolean;
   } & React.AriaAttributes
 ): JSX.Element {
-  const { value, required, onChange, ...aria } = props;
+  const { value, onChange, validator, ...aria } = props;
 
-  const [currentValue, setCurrentValue] = useState<string>(value);
-  const [empty, setEmpty] = useState(false);
+  const [oldValue, setOldValue] = useState<string>(value);
+  const [valid, setValid] = useState(true);
+
+  useEffect(
+    () => setValid(validator ? validator(value, oldValue) : true),
+    [value, oldValue, validator]
+  );
 
   const onInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    const oldValue = currentValue;
-    const newValue = e.target.value;
-
-    if (oldValue && !newValue) {
-      setEmpty(true);
-    }
-
-    if (newValue) {
-      setEmpty(false);
-    }
-
-    setCurrentValue(e.target.value);
-
     onChange(e.target.value);
+
+    setOldValue(e.target.value);
   };
 
   return (
-    <div className={`TextInput ${empty && required ? 'error' : ''}`} {...aria}>
+    <div className={`TextInput ${valid ? '' : 'error'}`} {...aria}>
       <input type="text" value={value} onChange={onInputChange} />
     </div>
   );
 }
 
 export default TextInput;
+
+export function required(value: string): boolean {
+  return Boolean(value);
+}

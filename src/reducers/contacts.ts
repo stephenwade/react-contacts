@@ -8,6 +8,7 @@ const contactsReducer: Reducer<
     activeContact: EditingContact | undefined;
     deleteInProgress: boolean;
     saveInProgress: boolean;
+    hasTriedToSave: boolean;
   },
   BasicAction
 > = (
@@ -16,6 +17,7 @@ const contactsReducer: Reducer<
     activeContact: undefined,
     deleteInProgress: false,
     saveInProgress: false,
+    hasTriedToSave: false,
   },
   action
 ) => {
@@ -70,6 +72,9 @@ const contactsReducer: Reducer<
 
     case ActionType.SaveCanceled:
       return { ...state, saveInProgress: false };
+
+    case ActionType.TriedToSave:
+      return { ...state, hasTriedToSave: true };
   }
 
   return state;

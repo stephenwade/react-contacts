@@ -9,6 +9,7 @@ function EmailsInput(
   props: {
     emails: string[];
     newEmails: NewEmail[];
+    hasTriedToSave: boolean;
     onAddEmailClick: () => void;
     onNewEmailChange: (key: string, value: string) => void;
     onEmailRemoveClick: (index: number) => void;
@@ -18,6 +19,7 @@ function EmailsInput(
   const {
     emails,
     newEmails,
+    hasTriedToSave,
     onAddEmailClick,
     onNewEmailChange,
     onEmailRemoveClick,
@@ -31,7 +33,7 @@ function EmailsInput(
         {emails.map((email, i) => (
           <EmailsInputListItem
             key={`existing ${email} ${i}`}
-            email={email}
+            value={email}
             onRemoveClick={() => onEmailRemoveClick(i)}
           />
         ))}
@@ -39,7 +41,8 @@ function EmailsInput(
           <EmailsInputListItem
             new
             key={`new ${email.id}`}
-            email={email.id}
+            value={email.email}
+            hasTriedToSave={hasTriedToSave}
             onChange={(value) => onNewEmailChange(email.id, value)}
             onRemoveClick={() => onNewEmailRemoveClick(email.id)}
           />

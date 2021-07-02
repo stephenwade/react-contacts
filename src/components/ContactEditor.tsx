@@ -3,23 +3,23 @@ import React from 'react';
 import AddButton from './AddButton';
 import EmailsInput from './EmailsInput';
 import LabelContainer from './LabelContainer';
-import TextInput from './TextInput';
+import TextInput, { required } from './TextInput';
 import { useAppDispatch, useAppSelector } from '../store';
 import {
   deleteContact,
   newContact,
   saveContact,
   setActiveContact,
+  tryingToSave,
   unselectContact,
 } from '../actions/contacts';
-import { newNewEmail } from '../types';
+import { isValidContact, newNewEmail } from '../types';
 
 import './ContactEditor.css';
 
 function ContactEditor(props: { loading: boolean }): JSX.Element {
-  const { activeContact, deleteInProgress, saveInProgress } = useAppSelector(
-    (state) => state.contacts
-  );
+  const { activeContact, deleteInProgress, saveInProgress, hasTriedToSave } =
+    useAppSelector((state) => state.contacts);
   const dispatch = useAppDispatch();
 
   const { loading } = props;
@@ -32,19 +32,19 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
             <LabelContainer name="firstName" label="First Name">
               <TextInput
                 value={activeContact.firstName || ''}
-                required
                 onChange={(value) =>
                   dispatch(setActiveContact({ firstName: value }))
                 }
+                validator={hasTriedToSave ? required : undefined}
               />
             </LabelContainer>
             <LabelContainer name="lastName" label="Last Name">
               <TextInput
                 value={activeContact.lastName || ''}
-                required
                 onChange={(value) =>
                   dispatch(setActiveContact({ lastName: value }))
                 }
+                validator={hasTriedToSave ? required : undefined}
               />
             </LabelContainer>
           </div>
@@ -53,6 +53,7 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
               <EmailsInput
                 emails={activeContact.emails || []}
                 newEmails={activeContact.newEmails || []}
+                hasTriedToSave={hasTriedToSave}
                 onAddEmailClick={() =>
                   dispatch(
                     setActiveContact({
@@ -124,7 +125,9 @@ function ContactEditor(props: { loading: boolean }): JSX.Element {
                 className="primary"
                 onClick={() => {
                   if (saveInProgress) return;
-                  dispatch(saveContact(activeContact));
+                  dispatch(tryingToSave());
+                  if (isValidContact(activeContact))
+                    dispatch(saveContact(activeContact));
                 }}
               >
                 {saveInProgress ? 'Saving…' : 'Save'}

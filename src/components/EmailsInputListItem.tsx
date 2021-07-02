@@ -3,13 +3,14 @@ import React from 'react';
 import AddButton from './AddButton';
 import RemoveButton from './RemoveButton';
 import TextInput from './TextInput';
+import { isValidEmailAddress } from '../types';
 
 import './EmailsInputListItem.css';
 
 function EmailsInputListItem(
   props:
     | {
-        email: string;
+        value: string;
         onRemoveClick: () => void;
       }
     | {
@@ -19,16 +20,21 @@ function EmailsInputListItem(
     | {
         new: true;
         value: string;
+        hasTriedToSave: boolean;
         onChange: (value: string) => void;
         onRemoveClick: () => void;
       }
 ): JSX.Element {
   if ('new' in props) {
-    const { value, onChange, onRemoveClick } = props;
+    const { value, hasTriedToSave, onChange, onRemoveClick } = props;
 
     return (
       <li className="EmailsInputListItem new">
-        <TextInput value={value} onChange={onChange} />
+        <TextInput
+          value={value}
+          onChange={onChange}
+          validator={hasTriedToSave ? isValidEmailAddress : undefined}
+        />
         <RemoveButton onClick={onRemoveClick} />
       </li>
     );
@@ -46,11 +52,11 @@ function EmailsInputListItem(
     );
   }
 
-  const { email, onRemoveClick } = props;
+  const { value, onRemoveClick } = props;
 
   return (
     <li className="EmailsInputListItem">
-      {email} <RemoveButton onClick={onRemoveClick} />
+      {value} <RemoveButton onClick={onRemoveClick} />
     </li>
   );
 }

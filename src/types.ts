@@ -25,6 +25,18 @@ export type EditingContact = Partial<
   Contact & { new: boolean; newEmails: NewEmail[] }
 >;
 
+export const isValidEmailAddress = (email: string): boolean =>
+  /^\S+@\S+\.\S+$/.test(email);
+
+export const isValidContact = (contact: EditingContact): boolean => {
+  return (
+    Boolean(contact.firstName) &&
+    Boolean(contact.lastName) &&
+    (!Array.isArray(contact.emails) ||
+      contact.emails.every(isValidEmailAddress))
+  );
+};
+
 export type ContactRequest = Omit<Contact, 'id'>;
 
 export const prepareContactForRequest = (
@@ -55,6 +67,7 @@ export enum ActionType {
   SaveStarted,
   SaveFinished,
   SaveCanceled,
+  TriedToSave,
 }
 
 export type BasicAction =
@@ -66,7 +79,8 @@ export type BasicAction =
         | ActionType.LoadingFinished
         | ActionType.DeleteStarted
         | ActionType.SaveStarted
-        | ActionType.SaveCanceled;
+        | ActionType.SaveCanceled
+        | ActionType.TriedToSave;
     }
   | {
       type: ActionType.ContactsLoaded;
