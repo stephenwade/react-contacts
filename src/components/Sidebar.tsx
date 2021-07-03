@@ -38,7 +38,12 @@ function Sidebar(props: {
   return (
     <div className="Sidebar">
       <h1>Contacts</h1>
-      {loading ? null : <AddButton onClick={() => dispatch(newContact())} />}
+      {loading ? null : (
+        <AddButton
+          onClick={() => dispatch(newContact())}
+          aria-label="Add contact"
+        />
+      )}
       <ul>
         {contacts.map((contact) => (
           <SidebarListItem

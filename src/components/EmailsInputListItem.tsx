@@ -36,8 +36,13 @@ function EmailsInputListItem(
           autoFocus={autoFocus}
           onChange={onChange}
           validator={hasTriedToSave ? isValidEmailAddress : undefined}
+          aria-label="New email"
         />
-        <RemoveButton tabIndex={0} onClick={onRemoveClick} />
+        <RemoveButton
+          tabIndex={0}
+          onClick={onRemoveClick}
+          aria-label="Remove email"
+        />
       </li>
     );
   }
@@ -48,9 +53,13 @@ function EmailsInputListItem(
     return (
       <li className="EmailsInputListItem add">
         <span
+          role="button"
           onClick={onAddClick}
           onKeyDown={(e) => {
             if (e.key === 'Enter') onAddClick();
+          }}
+          onKeyUp={(e) => {
+            if (e.key === ' ') onAddClick();
           }}
           tabIndex={0}
         >
@@ -64,7 +73,7 @@ function EmailsInputListItem(
 
   return (
     <li className="EmailsInputListItem">
-      {value} <RemoveButton onClick={onRemoveClick} />
+      {value} <RemoveButton onClick={onRemoveClick} aria-label="Remove email" />
     </li>
   );
 }

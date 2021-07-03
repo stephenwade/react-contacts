@@ -26,6 +26,7 @@ function SidebarListItem(
   return (
     <li
       className={`SidebarListItem ${active ? 'active' : ''}`}
+      role="link"
       onClick={onClick}
       onKeyDown={
         onClick

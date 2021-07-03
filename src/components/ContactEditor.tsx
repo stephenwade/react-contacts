@@ -182,8 +182,11 @@ const ContactEditor = React.forwardRef<HTMLInputElement, Props>(
               ) : (
                 <>
                   Click a contact to view or edit it. Click{' '}
-                  <AddButton onClick={() => dispatch(newContact())} /> to add a
-                  new contact.
+                  <AddButton
+                    onClick={() => dispatch(newContact())}
+                    aria-label="Add contact"
+                  />{' '}
+                  to add a new contact.
                 </>
               )}
             </span>
