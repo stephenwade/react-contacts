@@ -11,6 +11,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
+    "test": "jest",
     "lint:types": "tsc",
     "lint:eslint": "eslint . --ignore-path .gitignore",
     "lint:stylelint": "stylelint \"**/*.css\" --ignore-path .gitignore",
@@ -32,6 +33,9 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@types/jest": "^26.0.23",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
@@ -43,13 +47,18 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^6.0.0",
+    "jest": "^27.0.6",
+    "jest-transform-stub": "^2.0.0",
     "lint-staged": "^11.0.0",
+    "msw": "^0.30.1",
     "prettier": "^2.3.1",
     "stylelint": "^13.13.1",
     "stylelint-config-hudochenkov": "^5.0.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0",
+    "ts-jest": "^27.0.3",
+    "ts-node": "^10.0.0",
     "typescript": "^4.3.2",
     "vite": "^2.3.8"
   }
