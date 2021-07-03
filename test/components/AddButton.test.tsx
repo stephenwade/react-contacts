@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 
 import AddButton from '../../src/components/AddButton';
@@ -9,7 +10,7 @@ test('onClick', () => {
 
   render(<AddButton onClick={handleClick} />);
 
-  screen.getByRole('button').click();
+  userEvent.click(screen.getByRole('button'));
 
   expect(handleClick).toHaveBeenCalledTimes(1);
 });

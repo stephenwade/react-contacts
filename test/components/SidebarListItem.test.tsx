@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 
 import SidebarListItem from '../../src/components/SidebarListItem';
@@ -40,7 +41,7 @@ describe('existing contact', () => {
       />
     );
 
-    screen.getByText('Faye Armstrong').click();
+    userEvent.click(screen.getByText('Faye Armstrong'));
 
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
