@@ -1,5 +1,5 @@
 import { loadingStarted, loadingFinished } from './loading';
-import { error } from './error';
+import { clearError, error } from './error';
 import {
   ActionType,
   AppThunkAction,
@@ -66,6 +66,7 @@ const saveExistingContactAPI = async (
 
 export const loadContacts = (): AppThunkAction => async (dispatch) => {
   dispatch(loadingStarted());
+  dispatch(clearError());
 
   try {
     const contacts = await loadDataAPI();
@@ -104,6 +105,7 @@ export const deleteContact =
   (id: number): AppThunkAction =>
   async (dispatch) => {
     dispatch({ type: ActionType.DeleteStarted });
+    dispatch(clearError());
 
     try {
       await deleteContactAPI(id);
@@ -123,6 +125,7 @@ export const saveContact =
   (partialContact: EditingContact): AppThunkAction =>
   async (dispatch) => {
     dispatch({ type: ActionType.SaveStarted });
+    dispatch(clearError());
 
     const id = partialContact.id;
     try {

@@ -6,6 +6,9 @@ const errorReducer: Reducer<boolean, BasicAction> = (state = false, action) => {
   switch (action.type) {
     case ActionType.Error:
       return true;
+
+    case ActionType.ErrorClear:
+      return false;
   }
 
   return state;

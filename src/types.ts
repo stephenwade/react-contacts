@@ -60,6 +60,7 @@ export enum ActionType {
   ContactSelect,
   ContactSet,
   Error,
+  ErrorClear,
   LoadingStarted,
   LoadingFinished,
   EditorDirty,
@@ -75,6 +76,7 @@ export type BasicAction =
   | {
       type:
         | ActionType.Error
+        | ActionType.ErrorClear
         | ActionType.ContactNew
         | ActionType.LoadingStarted
         | ActionType.LoadingFinished
