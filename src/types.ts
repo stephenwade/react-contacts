@@ -32,8 +32,8 @@ export const isValidContact = (contact: EditingContact): boolean => {
   return (
     Boolean(contact.firstName) &&
     Boolean(contact.lastName) &&
-    (!Array.isArray(contact.emails) ||
-      contact.emails.every(isValidEmailAddress))
+    (!Array.isArray(contact.newEmails) ||
+      contact.newEmails.map((e) => e.email).every(isValidEmailAddress))
   );
 };
 
