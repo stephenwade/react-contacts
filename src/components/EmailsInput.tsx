@@ -37,11 +37,12 @@ function EmailsInput(
             onRemoveClick={() => onEmailRemoveClick(i)}
           />
         ))}
-        {newEmails.map((email) => (
+        {newEmails.map((email, i) => (
           <EmailsInputListItem
             new
             key={`new ${email.id}`}
             value={email.email}
+            autoFocus={i === newEmails.length - 1}
             hasTriedToSave={hasTriedToSave}
             onChange={(value) => onNewEmailChange(email.id, value)}
             onRemoveClick={() => onNewEmailRemoveClick(email.id)}

@@ -20,18 +20,20 @@ function EmailsInputListItem(
     | {
         new: true;
         value: string;
+        autoFocus: boolean;
         hasTriedToSave: boolean;
         onChange: (value: string) => void;
         onRemoveClick: () => void;
       }
 ): JSX.Element {
   if ('new' in props) {
-    const { value, hasTriedToSave, onChange, onRemoveClick } = props;
+    const { value, autoFocus, hasTriedToSave, onChange, onRemoveClick } = props;
 
     return (
       <li className="EmailsInputListItem new">
         <TextInput
           value={value}
+          autoFocus={autoFocus}
           onChange={onChange}
           validator={hasTriedToSave ? isValidEmailAddress : undefined}
         />
