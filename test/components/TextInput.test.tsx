@@ -38,6 +38,7 @@ test('validator', () => {
 });
 
 test('required export', () => {
+  expect(required()).toEqual(false);
   expect(required('')).toEqual(false);
   expect(required(' ')).toEqual(false);
   expect(required('Faye')).toEqual(true);

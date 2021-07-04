@@ -1,6 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
 
 import { AppState } from './store';
+import { required } from './components/TextInput';
 
 export type Contact = {
   id: number;
@@ -30,8 +31,8 @@ export const isValidEmailAddress = (email: string): boolean =>
 
 export const isValidContact = (contact: EditingContact): boolean => {
   return (
-    Boolean(contact.firstName) &&
-    Boolean(contact.lastName) &&
+    required(contact.firstName) &&
+    required(contact.lastName) &&
     (!Array.isArray(contact.newEmails) ||
       contact.newEmails.map((e) => e.email).every(isValidEmailAddress))
   );

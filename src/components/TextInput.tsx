@@ -45,6 +45,6 @@ const TextInput = React.forwardRef<HTMLInputElement, Props>(function TextInput(
 
 export default TextInput;
 
-export function required(value: string): boolean {
-  return Boolean(value.trim());
+export function required(value?: string): boolean {
+  return Boolean(value?.trim());
 }
