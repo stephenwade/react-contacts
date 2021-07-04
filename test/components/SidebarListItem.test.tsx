@@ -46,7 +46,7 @@ describe('existing contact', () => {
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  test('onKeyDown behaves the same as onClick', () => {
+  test('onKeyDown with Enter behaves the same as onClick', () => {
     const handleClick = jest.fn();
     const enterKeyDownEvent = new KeyboardEvent('keydown', {
       bubbles: true,

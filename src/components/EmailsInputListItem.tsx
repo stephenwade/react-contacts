@@ -20,8 +20,8 @@ function EmailsInputListItem(
     | {
         new: true;
         value: string;
-        autoFocus: boolean;
-        hasTriedToSave: boolean;
+        autoFocus?: boolean;
+        hasTriedToSave?: boolean;
         onChange: (value: string) => void;
         onRemoveClick: () => void;
       }
