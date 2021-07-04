@@ -83,7 +83,7 @@ const ContactEditor = React.forwardRef<HTMLInputElement, Props>(
                     if (activeContact.newEmails) {
                       const newEmails = [...activeContact.newEmails];
                       const newEmailIndex = newEmails.findIndex(
-                        (newEmail) => newEmail.id === newEmailKey
+                        (newEmail) => newEmail.key === newEmailKey
                       );
                       newEmails[newEmailIndex] = {
                         ...newEmails[newEmailIndex],
@@ -108,7 +108,7 @@ const ContactEditor = React.forwardRef<HTMLInputElement, Props>(
                     if (activeContact.newEmails) {
                       const newEmails = [...activeContact.newEmails];
                       const newEmailIndex = newEmails.findIndex(
-                        (newEmail) => newEmail.id === newEmailKey
+                        (newEmail) => newEmail.key === newEmailKey
                       );
                       newEmails.splice(newEmailIndex, 1);
                       dispatch(setActiveContact({ newEmails }));

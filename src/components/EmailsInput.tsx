@@ -9,11 +9,11 @@ function EmailsInput(
   props: {
     emails: string[];
     newEmails: NewEmail[];
-    hasTriedToSave: boolean;
-    onAddEmailClick: () => void;
-    onNewEmailChange: (key: string, value: string) => void;
-    onEmailRemoveClick: (index: number) => void;
-    onNewEmailRemoveClick: (key: string) => void;
+    hasTriedToSave?: boolean;
+    onAddEmailClick?: () => void;
+    onNewEmailChange?: (key: string, value: string) => void;
+    onEmailRemoveClick?: (index: number) => void;
+    onNewEmailRemoveClick?: (key: string) => void;
   } & React.AriaAttributes
 ): JSX.Element {
   const {
@@ -34,18 +34,28 @@ function EmailsInput(
           <EmailsInputListItem
             key={`existing ${email} ${i}`}
             value={email}
-            onRemoveClick={() => onEmailRemoveClick(i)}
+            onRemoveClick={
+              onEmailRemoveClick ? () => onEmailRemoveClick(i) : undefined
+            }
           />
         ))}
         {newEmails.map((email, i) => (
           <EmailsInputListItem
             new
-            key={`new ${email.id}`}
+            key={`new ${email.key}`}
             value={email.email}
             autoFocus={i === newEmails.length - 1}
             hasTriedToSave={hasTriedToSave}
-            onChange={(value) => onNewEmailChange(email.id, value)}
-            onRemoveClick={() => onNewEmailRemoveClick(email.id)}
+            onChange={
+              onNewEmailChange
+                ? (value) => onNewEmailChange(email.key, value)
+                : undefined
+            }
+            onRemoveClick={
+              onNewEmailRemoveClick
+                ? () => onNewEmailRemoveClick(email.key)
+                : undefined
+            }
           />
         ))}
         <EmailsInputListItem add onAddClick={onAddEmailClick} />

@@ -6,7 +6,7 @@ import './TextInput.css';
 type Props = {
   value: string;
   autoFocus?: boolean;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   validator?: (value: string, oldValue?: string) => boolean;
 } & React.AriaAttributes;
 
@@ -25,7 +25,7 @@ const TextInput = React.forwardRef<HTMLInputElement, Props>(function TextInput(
   );
 
   const onInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    onChange(e.target.value);
+    if (onChange) onChange(e.target.value);
 
     setOldValue(e.target.value);
   };

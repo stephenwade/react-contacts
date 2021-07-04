@@ -7,12 +7,7 @@ import EmailsInputListItem from '../../src/components/EmailsInputListItem';
 
 describe('existing email', () => {
   test('Visible text', () => {
-    render(
-      <EmailsInputListItem
-        value="faye.armstrong@brandsource.com"
-        onRemoveClick={jest.fn()}
-      />
-    );
+    render(<EmailsInputListItem value="faye.armstrong@brandsource.com" />);
 
     expect(screen.getByText('faye.armstrong@brandsource.com')).toBeTruthy();
   });
@@ -35,7 +30,7 @@ describe('existing email', () => {
 
 describe('add email button', () => {
   test('Visible text', () => {
-    render(<EmailsInputListItem add onAddClick={jest.fn()} />);
+    render(<EmailsInputListItem add />);
 
     expect(screen.getByText('add email')).toBeTruthy();
   });
@@ -45,7 +40,7 @@ describe('add email button', () => {
 
     render(<EmailsInputListItem add onAddClick={handleAddClick} />);
 
-    userEvent.click(screen.getAllByRole('button')[0]);
+    userEvent.click(screen.getByRole('button'));
 
     expect(handleAddClick).toHaveBeenCalledTimes(1);
   });
@@ -81,14 +76,7 @@ describe('add email button', () => {
 
 describe('new email', () => {
   test('Visible text', () => {
-    render(
-      <EmailsInputListItem
-        new
-        value="faye.armstrong@brandsource.com"
-        onChange={jest.fn()}
-        onRemoveClick={jest.fn()}
-      />
-    );
+    render(<EmailsInputListItem new value="faye.armstrong@brandsource.com" />);
 
     expect(screen.getByRole('textbox')).toHaveValue(
       'faye.armstrong@brandsource.com'
@@ -96,40 +84,17 @@ describe('new email', () => {
   });
 
   test('autoFocus', () => {
-    render(
-      <EmailsInputListItem
-        new
-        value="faye.armstrong@brandsource.com"
-        autoFocus
-        onChange={jest.fn()}
-        onRemoveClick={jest.fn()}
-      />
-    );
+    render(<EmailsInputListItem new value="" autoFocus />);
 
     expect(screen.getByRole('textbox')).toEqual(document.activeElement);
   });
 
   test('hasTriedToSave', () => {
-    render(
-      <EmailsInputListItem
-        new
-        value=""
-        onChange={jest.fn()}
-        onRemoveClick={jest.fn()}
-      />
-    );
+    render(<EmailsInputListItem new value="" />);
 
     expect(screen.getByRole('textbox')).not.toHaveClass('error');
 
-    render(
-      <EmailsInputListItem
-        new
-        value=""
-        hasTriedToSave
-        onChange={jest.fn()}
-        onRemoveClick={jest.fn()}
-      />
-    );
+    render(<EmailsInputListItem new value="" hasTriedToSave />);
 
     expect(screen.getAllByRole('textbox')[1]).toHaveClass('error');
   });
@@ -143,7 +108,6 @@ describe('new email', () => {
         value=""
         hasTriedToSave
         onChange={handleChange}
-        onRemoveClick={jest.fn()}
       />
     );
 
@@ -161,7 +125,6 @@ describe('new email', () => {
         new
         value=""
         hasTriedToSave
-        onChange={jest.fn()}
         onRemoveClick={handleRemoveClick}
       />
     );

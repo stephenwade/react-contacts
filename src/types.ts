@@ -11,12 +11,12 @@ export type Contact = {
 };
 
 export type NewEmail = {
-  id: string;
+  key: string;
   email: string;
 };
 
 export const newNewEmail = (): NewEmail => ({
-  id: Math.random()
+  key: Math.random()
     .toString(36)
     .replace(/[^a-z]+/g, ''),
   email: '',

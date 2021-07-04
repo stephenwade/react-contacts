@@ -11,19 +11,19 @@ function EmailsInputListItem(
   props:
     | {
         value: string;
-        onRemoveClick: () => void;
+        onRemoveClick?: () => void;
       }
     | {
         add: true;
-        onAddClick: () => void;
+        onAddClick?: () => void;
       }
     | {
         new: true;
         value: string;
         autoFocus?: boolean;
         hasTriedToSave?: boolean;
-        onChange: (value: string) => void;
-        onRemoveClick: () => void;
+        onChange?: (value: string) => void;
+        onRemoveClick?: () => void;
       }
 ): JSX.Element {
   if ('new' in props) {
@@ -55,15 +55,23 @@ function EmailsInputListItem(
         <span
           role="button"
           onClick={onAddClick}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') onAddClick();
-          }}
-          onKeyUp={(e) => {
-            if (e.key === ' ') onAddClick();
-          }}
+          onKeyDown={
+            onAddClick
+              ? (e) => {
+                  if (e.key === 'Enter') onAddClick();
+                }
+              : undefined
+          }
+          onKeyUp={
+            onAddClick
+              ? (e) => {
+                  if (e.key === ' ') onAddClick();
+                }
+              : undefined
+          }
           tabIndex={0}
         >
-          <AddButton tabIndex={-1} /> add email
+          <AddButton tabIndex={-1} aria-hidden="true" /> add email
         </span>
       </li>
     );

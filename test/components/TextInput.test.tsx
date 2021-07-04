@@ -6,13 +6,13 @@ import '@testing-library/jest-dom/extend-expect';
 import TextInput, { required } from '../../src/components/TextInput';
 
 test('Visible text', () => {
-  render(<TextInput value="Faye" onChange={jest.fn()} />);
+  render(<TextInput value="Faye" />);
 
   expect(screen.getByRole('textbox')).toBeTruthy();
 });
 
 test('autofocus', () => {
-  render(<TextInput value="Faye" autoFocus onChange={jest.fn()} />);
+  render(<TextInput value="Faye" autoFocus />);
 
   expect(screen.getByRole('textbox')).toEqual(document.activeElement);
 });
@@ -25,13 +25,13 @@ test('onChange', () => {
   userEvent.type(screen.getByRole('textbox'), 'F');
 
   expect(handleChange).toHaveBeenCalledTimes(1);
-  expect(handleChange.mock.calls[0][0]).toEqual('F');
+  expect(handleChange).toHaveBeenCalledWith('F');
 });
 
 test('validator', () => {
   const validateFn = jest.fn(() => false);
 
-  render(<TextInput value="" onChange={jest.fn()} validator={validateFn} />);
+  render(<TextInput value="" validator={validateFn} />);
 
   expect(validateFn).toHaveBeenCalledTimes(1);
   expect(screen.getByRole('textbox')).toHaveClass('error');
