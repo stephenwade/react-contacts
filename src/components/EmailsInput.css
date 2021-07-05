@@ -13,6 +13,7 @@
   padding: 6px 4px 6px 38px;
   color: var(--primary-color);
   cursor: pointer;
+  display: inline-block;
 }
 
 .EmailsInputAddButton > .AddButton {
