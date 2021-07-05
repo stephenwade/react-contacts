@@ -37,85 +37,89 @@ const ContactEditor = React.forwardRef<HTMLInputElement, Props>(
       <div className="ContactEditor">
         {activeContact ? (
           <>
-            <div className="NameRow">
-              <LabelContainer name="firstName" label="First Name">
-                <TextInput
-                  ref={firstInputRef}
-                  value={activeContact.firstName || ''}
-                  autoFocus
-                  onChange={(value) => {
-                    dispatch(editorDirty());
-                    dispatch(setActiveContact({ firstName: value }));
-                  }}
-                  validator={hasTriedToSave ? required : undefined}
-                />
-              </LabelContainer>
-              <LabelContainer name="lastName" label="Last Name">
-                <TextInput
-                  value={activeContact.lastName || ''}
-                  onChange={(value) => {
-                    dispatch(editorDirty());
-                    dispatch(setActiveContact({ lastName: value }));
-                  }}
-                  validator={hasTriedToSave ? required : undefined}
-                />
-              </LabelContainer>
-            </div>
-            <div className="EmailRow">
-              <LabelContainer name="emails" label="Email">
-                <EmailsInput
-                  emails={activeContact.emails || []}
-                  newEmails={activeContact.newEmails || []}
-                  hasTriedToSave={hasTriedToSave}
-                  onAddEmailClick={() => {
-                    dispatch(editorDirty());
-                    dispatch(
-                      setActiveContact({
-                        newEmails: [
-                          ...(activeContact.newEmails || []),
-                          newNewEmail(),
-                        ],
-                      })
-                    );
-                  }}
-                  onNewEmailChange={(newEmailKey, email) => {
-                    dispatch(editorDirty());
-                    if (activeContact.newEmails) {
-                      const newEmails = [...activeContact.newEmails];
-                      const newEmailIndex = newEmails.findIndex(
-                        (newEmail) => newEmail.key === newEmailKey
-                      );
-                      newEmails[newEmailIndex] = {
-                        ...newEmails[newEmailIndex],
-                        email,
-                      };
-                      dispatch(setActiveContact({ newEmails }));
-                    }
-                  }}
-                  onEmailRemoveClick={(emailIndex) => {
-                    dispatch(editorDirty());
-                    if (
-                      activeContact.emails &&
-                      activeContact.emails.length > emailIndex
-                    ) {
-                      const emails = [...activeContact.emails];
-                      emails.splice(emailIndex, 1);
-                      dispatch(setActiveContact({ emails }));
-                    }
-                  }}
-                  onNewEmailRemoveClick={(newEmailKey) => {
-                    dispatch(editorDirty());
-                    if (activeContact.newEmails) {
-                      const newEmails = [...activeContact.newEmails];
-                      const newEmailIndex = newEmails.findIndex(
-                        (newEmail) => newEmail.key === newEmailKey
-                      );
-                      newEmails.splice(newEmailIndex, 1);
-                      dispatch(setActiveContact({ newEmails }));
-                    }
-                  }}
-                />
-              </LabelContainer>
+            <div className="ContactDetails">
+              <div className="ContactDetailsScrollContainer">
+                <div className="NameRow">
+                  <LabelContainer name="firstName" label="First Name">
+                    <TextInput
+                      ref={firstInputRef}
+                      value={activeContact.firstName || ''}
+                      autoFocus
+                      onChange={(value) => {
+                        dispatch(editorDirty());
+                        dispatch(setActiveContact({ firstName: value }));
+                      }}
+                      validator={hasTriedToSave ? required : undefined}
+                    />
+                  </LabelContainer>
+                  <LabelContainer name="lastName" label="Last Name">
+                    <TextInput
+                      value={activeContact.lastName || ''}
+                      onChange={(value) => {
+                        dispatch(editorDirty());
+                        dispatch(setActiveContact({ lastName: value }));
+                      }}
+                      validator={hasTriedToSave ? required : undefined}
+                    />
+                  </LabelContainer>
+                </div>
+                <div className="EmailRow">
+                  <LabelContainer name="emails" label="Email">
+                    <EmailsInput
+                      emails={activeContact.emails || []}
+                      newEmails={activeContact.newEmails || []}
+                      hasTriedToSave={hasTriedToSave}
+                      onAddEmailClick={() => {
+                        dispatch(editorDirty());
+                        dispatch(
+                          setActiveContact({
+                            newEmails: [
+                              ...(activeContact.newEmails || []),
+                              newNewEmail(),
+                            ],
+                          })
+                        );
+                      }}
+                      onNewEmailChange={(newEmailKey, email) => {
+                        dispatch(editorDirty());
+                        if (activeContact.newEmails) {
+                          const newEmails = [...activeContact.newEmails];
+                          const newEmailIndex = newEmails.findIndex(
+                            (newEmail) => newEmail.key === newEmailKey
+                          );
+                          newEmails[newEmailIndex] = {
+                            ...newEmails[newEmailIndex],
+                            email,
+                          };
+                          dispatch(setActiveContact({ newEmails }));
+                        }
+                      }}
+                      onEmailRemoveClick={(emailIndex) => {
+                        dispatch(editorDirty());
+                        if (
+                          activeContact.emails &&
+                          activeContact.emails.length > emailIndex
+                        ) {
+                          const emails = [...activeContact.emails];
+                          emails.splice(emailIndex, 1);
+                          dispatch(setActiveContact({ emails }));
+                        }
+                      }}
+                      onNewEmailRemoveClick={(newEmailKey) => {
+                        dispatch(editorDirty());
+                        if (activeContact.newEmails) {
+                          const newEmails = [...activeContact.newEmails];
+                          const newEmailIndex = newEmails.findIndex(
+                            (newEmail) => newEmail.key === newEmailKey
+                          );
+                          newEmails.splice(newEmailIndex, 1);
+                          dispatch(setActiveContact({ newEmails }));
+                        }
+                      }}
+                    />
+                  </LabelContainer>
+                </div>
+              </div>
             </div>
             <div className="ButtonsRow">
               <div className="ButtonsGroup">

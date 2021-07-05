@@ -27,6 +27,8 @@
 .Sidebar > ul {
   position: absolute;
   top: 70px;
+  bottom: 0;
+  overflow-y: auto;
   width: 100%;
   margin: 0;
   padding: 0;
