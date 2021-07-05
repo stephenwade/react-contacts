@@ -14,7 +14,7 @@ test('Visible text', () => {
 test('autofocus', () => {
   render(<TextInput value="Faye" autoFocus />);
 
-  expect(screen.getByRole('textbox')).toEqual(document.activeElement);
+  expect(screen.getByRole('textbox')).toBe(document.activeElement);
 });
 
 test('onChange', () => {
@@ -38,9 +38,9 @@ test('validator', () => {
 });
 
 test('required export', () => {
-  expect(required()).toEqual(false);
-  expect(required('')).toEqual(false);
-  expect(required(' ')).toEqual(false);
-  expect(required('Faye')).toEqual(true);
-  expect(required('Ana Marie')).toEqual(true);
+  expect(required()).toBe(false);
+  expect(required('')).toBe(false);
+  expect(required(' ')).toBe(false);
+  expect(required('Faye')).toBe(true);
+  expect(required('Ana Marie')).toBe(true);
 });

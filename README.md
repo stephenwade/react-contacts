@@ -7,7 +7,7 @@ This is a frontend for a simple address book/contacts app written in React and T
 <!-- TODO: Fully responsive design – looks good on any screen size -->
 <!-- TODO: Respects system-wide dark mode setting -->
 
-- Fully accessible (tested with ChromeVox) <!-- TODO: Add testing with axe -->
+- Fully accessible to screen readers <!-- TODO: Add testing with axe -->
 - Fully keyboard-navigable
 
 ## Tooling

@@ -86,7 +86,7 @@ describe('new email', () => {
   test('autoFocus', () => {
     render(<EmailsInputListItem new value="" autoFocus />);
 
-    expect(screen.getByRole('textbox')).toEqual(document.activeElement);
+    expect(screen.getByRole('textbox')).toBe(document.activeElement);
   });
 
   test('hasTriedToSave', () => {
@@ -114,7 +114,7 @@ describe('new email', () => {
     userEvent.type(screen.getByRole('textbox'), 'f');
 
     expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange.mock.calls[0][0]).toEqual('f');
+    expect(handleChange.mock.calls[0][0]).toBe('f');
   });
 
   test('onRemoveClick', () => {

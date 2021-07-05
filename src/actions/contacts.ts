@@ -10,7 +10,8 @@ import {
   prepareContactForRequest,
 } from '../types';
 
-const CONTACTS_ENDPOINT = 'https://avb-contacts-api.herokuapp.com/contacts';
+export const CONTACTS_ENDPOINT =
+  'https://avb-contacts-api.herokuapp.com/contacts';
 
 const loadDataAPI = async (): Promise<Contact[]> => {
   const result = await fetch(CONTACTS_ENDPOINT);
@@ -71,8 +72,9 @@ export const loadContacts = (): AppThunkAction => async (dispatch) => {
   try {
     const contacts = await loadDataAPI();
     dispatch({ type: ActionType.ContactsLoaded, contacts });
-  } catch {
+  } catch (e) {
     dispatch(error());
+    console.log(e);
   }
 
   dispatch(loadingFinished());
@@ -109,8 +111,9 @@ export const deleteContact =
 
     try {
       await deleteContactAPI(id);
-    } catch {
+    } catch (e) {
       dispatch(error());
+      console.log(e);
     }
 
     dispatch({ type: ActionType.DeleteFinished, id });
@@ -143,8 +146,9 @@ export const saveContact =
 
         dispatch({ type: ActionType.SaveFinished, contact });
       }
-    } catch {
+    } catch (e) {
       dispatch(error());
       dispatch({ type: ActionType.SaveCanceled });
+      console.log(e);
     }
   };

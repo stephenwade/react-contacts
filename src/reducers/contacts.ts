@@ -55,7 +55,7 @@ const contactsReducer: Reducer<
     case ActionType.DeleteFinished:
       return {
         ...state,
-        contacts: state.contacts.filter((contact) => contact.id !== action.id),
+        contacts: state.contacts.filter((contact) => contact.id != action.id),
         deleteInProgress: false,
       };
 
@@ -67,7 +67,7 @@ const contactsReducer: Reducer<
         ...state,
         contacts: [
           ...state.contacts.filter(
-            (contact) => contact.id !== action.contact.id
+            (contact) => contact.id != action.contact.id
           ),
           action.contact,
         ],

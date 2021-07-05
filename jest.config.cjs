@@ -5,15 +5,9 @@ module.exports = {
 
   testMatch: ['**/?(*.)test.ts?(x)'],
 
-  collectCoverage: true,
-
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
-
-  coverageProvider: 'v8',
-
   transform: {
     '.+\\.css$': 'jest-transform-stub',
   },
+
+  transformIgnorePatterns: ['node_modules/(?!@reach)'],
 };

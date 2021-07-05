@@ -21,7 +21,5 @@ test('Visible label', () => {
     </LabelContainer>
   );
 
-  expect(screen.getByLabelText('First Name')).toEqual(
-    screen.getByRole('textbox')
-  );
+  expect(screen.getByLabelText('First Name')).toBe(screen.getByRole('textbox'));
 });
