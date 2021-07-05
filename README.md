@@ -1,26 +1,24 @@
 # AVB Contacts
 
-This is a frontend for a simple address book/contacts app written in React and TypeScript.
+This is a frontend for a simple address book/contacts app written in [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/).
 
 ## Features
 
 <!-- TODO: Fully responsive design – looks good on any screen size -->
 <!-- TODO: Respects system-wide dark mode setting -->
 
-- Fully accessible to screen readers <!-- TODO: Add testing with axe -->
+- Fully accessible to screen readers (tested with [ChromeVox](https://chrome.google.com/webstore/detail/screen-reader/kgejglhpjiefppelpmljglcjbhoiplfn))
 - Fully keyboard-navigable
 
 ## Tooling
 
-- Componentized UI written in React
-- Application state managed by Redux
-- Built for production with Vite
-- TypeScript linted with ESLint
-- CSS linted with Stylelint
-- Code formatted with Prettier
-  <!-- TODO: Add unit testing with Jest and React Testing Library -->
-  <!-- TODO: Add accessibility testing with axe (https://github.com/nickcolley/jest-axe) -->
-  <!-- TODO: Add end-to-end test with Playwright Test Runner -->
+- Componentized UI written in [React](https://reactjs.org/)
+- Application state managed by [Redux](https://redux.js.org/)
+- Built for production with [Vite](https://vitejs.dev/)
+- TypeScript linted with [ESLint](https://eslint.org/)
+- CSS linted with [Stylelint](https://stylelint.io/)
+- Code formatted with [Prettier](https://prettier.io/)
+- Unit tested with [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
 ## Local Development
 
