@@ -28,52 +28,6 @@ describe('existing email', () => {
   });
 });
 
-describe('add email button', () => {
-  test('Visible text', () => {
-    render(<EmailsInputListItem add />);
-
-    expect(screen.getByText('add email')).toBeTruthy();
-  });
-
-  test('onAddClick', () => {
-    const handleAddClick = jest.fn();
-
-    render(<EmailsInputListItem add onAddClick={handleAddClick} />);
-
-    userEvent.click(screen.getByRole('button'));
-
-    expect(handleAddClick).toHaveBeenCalledTimes(1);
-  });
-
-  test('onKeyDown with Enter behaves the same as onAddClick', () => {
-    const handleAddClick = jest.fn();
-    const enterKeyDownEvent = new KeyboardEvent('keydown', {
-      bubbles: true,
-      key: 'Enter',
-    });
-
-    render(<EmailsInputListItem add onAddClick={handleAddClick} />);
-
-    screen.getByText('add email').dispatchEvent(enterKeyDownEvent);
-
-    expect(handleAddClick).toHaveBeenCalledTimes(1);
-  });
-
-  test('onKeyUp with spacebar behaves the same as onAddClick', () => {
-    const handleAddClick = jest.fn();
-    const spaceKeyUpEvent = new KeyboardEvent('keyup', {
-      bubbles: true,
-      key: ' ',
-    });
-
-    render(<EmailsInputListItem add onAddClick={handleAddClick} />);
-
-    screen.getByText('add email').dispatchEvent(spaceKeyUpEvent);
-
-    expect(handleAddClick).toHaveBeenCalledTimes(1);
-  });
-});
-
 describe('new email', () => {
   test('Visible text', () => {
     render(<EmailsInputListItem new value="faye.armstrong@brandsource.com" />);

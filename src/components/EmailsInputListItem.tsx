@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import AddButton from './AddButton';
 import RemoveButton from './RemoveButton';
 import TextInput from './TextInput';
 import { isValidEmailAddress } from '../types';
@@ -12,10 +11,6 @@ function EmailsInputListItem(
     | {
         value: string;
         onRemoveClick?: () => void;
-      }
-    | {
-        add: true;
-        onAddClick?: () => void;
       }
     | {
         new: true;
@@ -43,36 +38,6 @@ function EmailsInputListItem(
           onClick={onRemoveClick}
           aria-label="Remove email"
         />
-      </li>
-    );
-  }
-
-  if ('add' in props) {
-    const { onAddClick } = props;
-
-    return (
-      <li className="EmailsInputListItem add">
-        <span
-          role="button"
-          onClick={onAddClick}
-          onKeyDown={
-            onAddClick
-              ? (e) => {
-                  if (e.key === 'Enter') onAddClick();
-                }
-              : undefined
-          }
-          onKeyUp={
-            onAddClick
-              ? (e) => {
-                  if (e.key === ' ') onAddClick();
-                }
-              : undefined
-          }
-          tabIndex={0}
-        >
-          <AddButton tabIndex={-1} aria-hidden="true" /> add email
-        </span>
       </li>
     );
   }

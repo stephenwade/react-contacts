@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import EmailsInputListItem from './EmailsInputListItem';
+import AddButton from './AddButton';
 import { NewEmail } from '../types';
 
 import './EmailsInput.css';
@@ -58,8 +59,29 @@ function EmailsInput(
             }
           />
         ))}
-        <EmailsInputListItem add onAddClick={onAddEmailClick} />
       </ul>
+      <div
+        className="EmailsInputAddButton"
+        role="button"
+        onClick={onAddEmailClick}
+        onKeyDown={
+          onAddEmailClick
+            ? (e) => {
+                if (e.key === 'Enter') onAddEmailClick();
+              }
+            : undefined
+        }
+        onKeyUp={
+          onAddEmailClick
+            ? (e) => {
+                if (e.key === ' ') onAddEmailClick();
+              }
+            : undefined
+        }
+        tabIndex={0}
+      >
+        <AddButton tabIndex={-1} aria-hidden="true" /> add email
+      </div>
     </div>
   );
 }
