@@ -28,3 +28,9 @@
   bottom: 9px;
 }
 /* stylelint-enable no-descending-specificity */
+
+@media (max-width: 720px) {
+  .EmailsInputListItem.new > .TextInput {
+    width: calc(100% - 45px);
+  }
+}
