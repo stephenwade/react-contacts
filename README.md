@@ -4,10 +4,7 @@ This is a frontend for a simple address book/contacts app written in [React](htt
 
 ## Features
 
-<!-- TODO: Fully responsive design – looks good on any screen size -->
-<!-- TODO: Respects system-wide dark mode setting -->
-
-- Fully accessible to screen readers (tested with [ChromeVox](https://chrome.google.com/webstore/detail/screen-reader/kgejglhpjiefppelpmljglcjbhoiplfn))
+- Accessible to screen readers (tested with [ChromeVox](https://chrome.google.com/webstore/detail/screen-reader/kgejglhpjiefppelpmljglcjbhoiplfn))
 - Fully keyboard-navigable
 
 ## Tooling
@@ -27,7 +24,9 @@ This is a frontend for a simple address book/contacts app written in [React](htt
 
 ## Building
 
-- `npm run build` will build the application. <!-- TODO: "in the `xyz/` folder" -->
+- `npm run build` will build the application in the `dist/` folder.
 - `npm run serve` will serve the bundled application.
 
-<!-- TODO: ## Deploying -->
+## Deploying
+
+- To deploy the application, publish the contents of the `dist/` folder to any static web host.
