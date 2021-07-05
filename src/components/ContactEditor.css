@@ -5,6 +5,7 @@
   flex-direction: column;
   padding: 77px 32px 32px 32px;
   color: var(--text-color);
+  background-color: var(--background-color-3);
 }
 
 .ContactEditor > .EmptyMessage {
@@ -93,6 +94,7 @@
 .DialogButtonsRow button.secondary {
   border: 1px solid var(--primary-color);
   background-color: var(--background-color-2);
+  color: var(--text-color-3);
 }
 
 .ContactEditor button.destructive,

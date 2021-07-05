@@ -4,8 +4,9 @@ This is a frontend for a simple address book/contacts app written in [React](htt
 
 ## Features
 
-- Accessible to screen readers (tested with [ChromeVox](https://chrome.google.com/webstore/detail/screen-reader/kgejglhpjiefppelpmljglcjbhoiplfn))
+- Respects system-wide dark mode
 - Fully keyboard-navigable
+- Accessible to screen readers (tested with [ChromeVox](https://chrome.google.com/webstore/detail/screen-reader/kgejglhpjiefppelpmljglcjbhoiplfn))
 
 ## Tooling
 
