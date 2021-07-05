@@ -7,6 +7,7 @@
   color: white;
 }
 
+.SidebarListItem.empty,
 .SidebarListItem.new {
   font-style: italic;
 }

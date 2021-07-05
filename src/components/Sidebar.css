@@ -36,6 +36,6 @@
   list-style: none;
 }
 
-.Sidebar > ul > .SidebarListItem {
+.Sidebar > ul > .SidebarListItem:not(.empty) {
   cursor: pointer;
 }

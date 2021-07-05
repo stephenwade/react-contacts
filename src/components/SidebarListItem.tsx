@@ -12,11 +12,20 @@ function SidebarListItem(
         onClick?: () => void;
       }
     | { new: true }
+    | { empty: true }
 ): JSX.Element {
   if ('new' in props) {
     return (
       <li className="SidebarListItem new active" tabIndex={0}>
         New contact
+      </li>
+    );
+  }
+
+  if ('empty' in props) {
+    return (
+      <li className="SidebarListItem empty" tabIndex={0}>
+        No contacts yet
       </li>
     );
   }

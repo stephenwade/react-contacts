@@ -59,6 +59,9 @@ function Sidebar(props: {
         {activeContact && !('id' in activeContact) ? (
           <SidebarListItem new onClick={onItemClicked} />
         ) : null}
+        {contacts.length === 0 && !activeContact ? (
+          <SidebarListItem empty />
+        ) : null}
       </ul>
     </div>
   );
